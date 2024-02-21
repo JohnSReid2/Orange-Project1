@@ -8,46 +8,27 @@ namespace Tangerine_Tournament
 {
     public class Team
     {
-        public int Id { get; set; }
+        public int TeamID { get; set; }
         public string TeamName { get; set; }
-        public List<Player> Players { get; set; } = new List<Player>();
+        public Player TeamCaptain { get; set; }
+        public List<Player> Players { get; set; }
 
-        // Constructor
-        public Team(string teamName)
+        public Team(int teamID, string teamName, Player teamCaptain)
         {
+            TeamID = teamID;
             TeamName = teamName;
+            TeamCaptain = teamCaptain;
             Players = new List<Player>();
         }
 
-        // Method to add a player to the team
         public void AddPlayer(Player player)
         {
             Players.Add(player);
         }
 
-        // Method to remove a player from the team
         public void RemovePlayer(Player player)
         {
             Players.Remove(player);
-        }
-
-        // Method to get the number of players in the team
-        public int GetNumberOfPlayers()
-        {
-            return Players.Count;
-        }
-
-        // Method to display team information
-        public override string ToString()
-        {
-            string playerList = "";
-            foreach (var player in Players)
-            {
-                playerList += player.GetFullName() + ", ";
-            }
-            playerList = playerList.TrimEnd(',', ' ');
-
-            return $"Team Name: {TeamName}\nPlayers: {playerList}";
         }
     }
 }
