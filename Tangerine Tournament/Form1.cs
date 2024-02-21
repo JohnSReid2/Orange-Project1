@@ -6,5 +6,12 @@ namespace Tangerine_Tournament
         {
             InitializeComponent();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            ManagerView manager = new ManagerView();
+            manager.Show();
+        }
     }
 }

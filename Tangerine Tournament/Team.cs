@@ -8,8 +8,9 @@ namespace Tangerine_Tournament
 {
     public class Team
     {
+        public int Id { get; set; }
         public string TeamName { get; set; }
-        public List<Player> Players { get; set; }
+        public List<Player> Players { get; set; } = new List<Player>();
 
         // Constructor
         public Team(string teamName)

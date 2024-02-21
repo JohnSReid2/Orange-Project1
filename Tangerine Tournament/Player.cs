@@ -8,20 +8,22 @@ namespace Tangerine_Tournament
 {
     public class Player
     {
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int Age { get; set; }
         public string Country { get; set; }
         public string GamerTag { get; set; }
+        public string EmailAddress { get; set; }
 
         // Constructor
-        public Player(string firstName, string lastName, int age, string country, string gamerTag)
+        public Player(int id, string firstName, string lastName, int age, string country, string gamerTag, string emailAddress)
         {
+            Id = id;
             FirstName = firstName;
             LastName = lastName;
-            Age = age;
             Country = country;
             GamerTag = gamerTag;
+            EmailAddress = emailAddress;
         }
 
         // Method to get player's full name
@@ -33,7 +35,7 @@ namespace Tangerine_Tournament
         // Method to display player's information
         public override string ToString()
         {
-            return $"Name: {GetFullName()}, Age: {Age}, Country: {Country}, GamerTag: {GamerTag}";
+            return $"Name: {GetFullName()}, Country: {Country}, GamerTag: {GamerTag}, Email Address {EmailAddress}";
         }
     }
 }
