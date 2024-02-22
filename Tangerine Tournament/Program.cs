@@ -19,6 +19,8 @@ namespace Tangerine_Tournament
 */
 using System;
 
+using System;
+
 namespace Tangerine_Tournament
 {
     class Program
@@ -43,7 +45,7 @@ namespace Tangerine_Tournament
             TournamentBuilder tournamentBuilder = new TournamentBuilder();
 
             // Create a tournament
-            string tournamentName = "Tournament4";
+            string tournamentName = "Tournament5";
             tournamentBuilder.CreateTournament(tournamentName, "Single Elimination");
 
             // Add players and teams to the tournament
@@ -62,12 +64,15 @@ namespace Tangerine_Tournament
             player1.FirstName = "Johnny";
             tournamentBuilder.UpdatePlayer(tournamentName, player1);
 
+            // Update team information
+            team1.TeamName = "Updated Team Alpha";
+            tournamentBuilder.UpdateTeam(tournamentName, team1);
+
             // Remove a player
             tournamentBuilder.RemovePlayer(tournamentName, player3);
 
             // Remove a team
             tournamentBuilder.RemoveTeam(tournamentName, team2);
-
         }
     }
 }

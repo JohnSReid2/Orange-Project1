@@ -332,6 +332,40 @@ namespace Tangerine_Tournament
             }
         }
 
+        public void UpdateTeam(string tournamentName, Team team)
+        {
+            string connectionString = $"Data Source={tournamentName}.db";
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                try
+                {
+                    // Construct the UPDATE query to update team information
+                    string updateTeamQuery = $"UPDATE Teams SET TeamName = '{team.TeamName}', TeamCaptainID = {team.TeamCaptain.Id} WHERE TeamID = {team.TeamID}";
+
+                    // Execute the UPDATE query
+                    using (SqliteCommand command = new SqliteCommand(updateTeamQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    // Recalculate team's average timezone
+                    RecalculateTeamAverageTimezone(connection, team.TeamID);
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                finally
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+        }
+
         // Helper method to recalculate team's average timezone
         private void RecalculateTeamAverageTimezone(SqliteConnection connection, int teamID)
         {
