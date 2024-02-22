@@ -12,6 +12,7 @@ namespace Tangerine_Tournament
         public string TeamName { get; set; }
         public Player TeamCaptain { get; set; }
         public List<Player> Players { get; set; }
+        public double AverageTimezone { get; private set; }
 
         public Team(int teamID, string teamName, Player teamCaptain)
         {
@@ -29,6 +30,22 @@ namespace Tangerine_Tournament
         public void RemovePlayer(Player player)
         {
             Players.Remove(player);
+        }
+
+        public void CalculateAverageTimezone()
+        {
+            if (Players.Count == 0)
+            {
+                AverageTimezone = 0; // or any default value you prefer
+                return;
+            }
+
+            double total = 0;
+            foreach (var player in Players)
+            {
+                total += player.Timezone;
+            }
+            AverageTimezone = total / Players.Count;
         }
     }
 }
