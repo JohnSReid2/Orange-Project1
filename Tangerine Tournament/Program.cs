@@ -99,7 +99,7 @@ namespace Tangerine_Tournament
         {
             // Load tournament information
             Tangerine_Tournament.TournamentGetter tournamentGetter = new Tangerine_Tournament.TournamentGetter("SampleTournament");
-            Tangerine_Tournament.TournamentInfo tournamentInfo = tournamentGetter.GetTournamentInfo();
+            Tangerine_Tournament.SingleElimination tournamentInfo = tournamentGetter.GetTournamentInfo();
 
             // Display tournament information
             Console.WriteLine("Tournament Information:");

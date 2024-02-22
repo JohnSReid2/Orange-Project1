@@ -58,7 +58,7 @@ namespace Tangerine_Tournament
                                 command.ExecuteNonQuery();
                             }
                         }
-                        MessageBox.Show("DataBase is Created Su cessfully", "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("DataBase is Created Sucessfully", "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (System.Exception ex)
                     {
