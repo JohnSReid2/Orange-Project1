@@ -179,5 +179,29 @@ namespace Tangerine_Tournament
                 }
             }
         }
+
+        public SingleElimination GetTournamentInfo()
+        {
+            SingleElimination tournamentInfo = null;
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                string query = $"SELECT * FROM TournamentInfo";
+                using (SqliteCommand command = new SqliteCommand(query, connection))
+                {
+                    using (SqliteDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            string name = reader.GetString(0);
+                            string date = reader.GetString(1);
+                            string type = reader.GetString(2);
+                            tournamentInfo = new SingleElimination(name, date, type);
+                        }
+                    }
+                }
+            }
+            return tournamentInfo;
+        }
     }
 }

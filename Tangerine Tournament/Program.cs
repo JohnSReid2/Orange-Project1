@@ -73,6 +73,44 @@ namespace Tangerine_Tournament
 
             // Remove a team
             tournamentBuilder.RemoveTeam(tournamentName, team2);
+
+            TestPlayerAndTeam();
+            TestTournamentInfo();
+        }
+
+        static void TestPlayerAndTeam()
+        {
+            // Load player and team information
+            Tangerine_Tournament.TournamentGetter tournamentGetter = new Tangerine_Tournament.TournamentGetter("SampleTournament");
+            Tangerine_Tournament.Player player = tournamentGetter.GetPlayer(1);
+            Tangerine_Tournament.Team team = tournamentGetter.GetTeam(1);
+
+            // Display player and team information
+            Console.WriteLine("Player Information:");
+            Console.WriteLine(player);
+            Console.WriteLine();
+
+            Console.WriteLine("Team Information:");
+            Console.WriteLine(team);
+            Console.WriteLine();
+        }
+
+        static void TestTournamentInfo()
+        {
+            // Load tournament information
+            Tangerine_Tournament.TournamentGetter tournamentGetter = new Tangerine_Tournament.TournamentGetter("SampleTournament");
+            Tangerine_Tournament.TournamentInfo tournamentInfo = tournamentGetter.GetTournamentInfo();
+
+            // Display tournament information
+            Console.WriteLine("Tournament Information:");
+            Console.WriteLine($"Name: {tournamentInfo.Name}");
+            Console.WriteLine($"Date: {tournamentInfo.Date}");
+            Console.WriteLine($"Type: {tournamentInfo.Type}");
+            Console.WriteLine();
         }
     }
+
+
+
+
 }
