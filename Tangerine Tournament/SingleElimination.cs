@@ -143,8 +143,8 @@ namespace Tangerine_Tournament
                             int team1ID = reader.GetInt32(1);
                             int team2ID = reader.GetInt32(2);
                             // Assuming Team1ID and Team2ID are the foreign keys referencing Teams table
-                            Team team1 = GetTeam(team1ID);
-                            Team team2 = GetTeam(team2ID);
+                            Team team1 = getter.GetTeam(team1ID);
+                            Team team2 = getter.GetTeam(team2ID);
                             Team winner = reader.IsDBNull(3) ? null : reader.GetInt32(3) == team1ID ? team1 : team2;
                             Match match = new Match(team1, team2) { Winner = winner };
                             matches.Add(match);
@@ -154,6 +154,29 @@ namespace Tangerine_Tournament
             }
 
             return matches;
+        }
+
+        public void UpdateMatchWinner(int matchId, int winnerTeamId)
+        {
+            string connectionString = $"Data Source={Name}.db";
+
+            try
+            {
+                using (SqliteConnection connection = new SqliteConnection(connectionString))
+                {
+                    connection.Open();
+                    string updateQuery = $"UPDATE Matches SET Winner = {winnerTeamId} WHERE MatchID = {matchId}";
+
+                    using (SqliteCommand command = new SqliteCommand(updateQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
 
@@ -172,19 +195,44 @@ namespace Tangerine_Tournament
         }
 
 
-        private Team GetTeam(int teamId)
-        {
-            // Implement code to retrieve team information from the database
-            // You can use the TournamentGetter class or directly execute SQL queries
-            // Return a Team object based on the teamId
-            throw new NotImplementedException();
-        }
-
         private void StoreMatches(List<Match> matches)
         {
-            // Implement code to store matches in the database
-            // You need to define a schema for the Matches table and insert match information into it
-            throw new NotImplementedException();
+
+            string connectionString = $"Data Source={Name}.db";
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                using (SqliteTransaction transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        foreach (Match match in matches)
+                        {
+                            string insertMatchQuery = "INSERT INTO Matches (Team1ID, Team2ID, WinnerID) VALUES (@team1ID, @team2ID, @winnerID)";
+                            using (SqliteCommand command = new SqliteCommand(insertMatchQuery, connection, transaction))
+                            {
+                                command.Parameters.AddWithValue("@team1ID", match.Team1.TeamID);
+                                command.Parameters.AddWithValue("@team2ID", match.Team2.TeamID);
+                                if (match.Winner != null)
+                                {
+                                    command.Parameters.AddWithValue("@winnerID", match.Winner.TeamID);
+                                }
+                                else
+                                {
+                                    command.Parameters.AddWithValue("@winnerID", DBNull.Value);
+                                }
+                                command.ExecuteNonQuery();
+                            }
+                        }
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+                }
+            }
         }
     }
 }

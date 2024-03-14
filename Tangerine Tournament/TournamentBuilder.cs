@@ -57,6 +57,11 @@ namespace Tangerine_Tournament
                             {
                                 command.ExecuteNonQuery();
                             }
+                            string createTableQuery2 = $"CREATE TABLE Matches (Team1ID int, Team2ID int, WinnerID int);";
+                            using (SqliteCommand command = new SqliteCommand(createTableQuery2, connection))
+                            {
+                                command.ExecuteNonQuery();
+                            }
                         }
                         MessageBox.Show("DataBase is Created Sucessfully", "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
