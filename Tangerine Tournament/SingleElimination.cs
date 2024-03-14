@@ -28,13 +28,16 @@ namespace Tangerine_Tournament
 
         public void GenerateMatches()
         {
+
             try
             {
                 // Retrieve team information
                 List<Team> teams = new List<Team>();
+
                 string connectionString = $"Data Source={Name}.db";
                 TournamentBuilder builder = new TournamentBuilder();
                 TournamentGetter getter = new TournamentGetter(Name);
+
                 using (SqliteConnection connection = new SqliteConnection(connectionString))
                 {
                     connection.Open();
@@ -78,7 +81,82 @@ namespace Tangerine_Tournament
                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
+        public void GenerateNextRound()
+        {
+            try
+            {
+                List<Match> previousRoundMatches = GetCompletedMatches();
+                List<Team> winners = new List<Team>();
+
+                // Determine winners of previous round matches
+                foreach (Match match in previousRoundMatches)
+                {
+                    if (match.Winner != null)
+                    {
+                        winners.Add(match.Winner);
+                    }
+                    else
+                    {
+                        // Handle cases where winner is not determined yet
+                        MessageBox.Show($"Winner of match between {match.Team1.TeamName} and {match.Team2.TeamName} is not determined.", "Incomplete Match", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+
+                // Generate matches for the next round
+                List<Match> nextRoundMatches = new List<Match>();
+                for (int i = 0; i < winners.Count; i += 2)
+                {
+                    Team team1 = winners[i];
+                    Team team2 = i + 1 < winners.Count ? winners[i + 1] : null; // Handle odd number of winners
+                    Match match = new Match(team1, team2);
+                    nextRoundMatches.Add(match);
+                }
+
+                // Store next round matches in the database
+                StoreMatches(nextRoundMatches);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private List<Match> GetCompletedMatches()
+        {
+            List<Match> matches = new List<Match>();
+
+            string connectionString = $"Data Source={Name}.db";
+            TournamentBuilder builder = new TournamentBuilder();
+            TournamentGetter getter = new TournamentGetter(Name);
+
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Matches WHERE Winner IS NOT NULL";
+                using (SqliteCommand command = new SqliteCommand(query, connection))
+                {
+                    using (SqliteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int team1ID = reader.GetInt32(1);
+                            int team2ID = reader.GetInt32(2);
+                            // Assuming Team1ID and Team2ID are the foreign keys referencing Teams table
+                            Team team1 = GetTeam(team1ID);
+                            Team team2 = GetTeam(team2ID);
+                            Team winner = reader.IsDBNull(3) ? null : reader.GetInt32(3) == team1ID ? team1 : team2;
+                            Match match = new Match(team1, team2) { Winner = winner };
+                            matches.Add(match);
+                        }
+                    }
+                }
+            }
+
+            return matches;
+        }
+
+
         private void Shuffle<T>(IList<T> list)
         {
             Random rng = new Random();
@@ -91,6 +169,22 @@ namespace Tangerine_Tournament
                 list[k] = list[n];
                 list[n] = value;
             }
+        }
+
+
+        private Team GetTeam(int teamId)
+        {
+            // Implement code to retrieve team information from the database
+            // You can use the TournamentGetter class or directly execute SQL queries
+            // Return a Team object based on the teamId
+            throw new NotImplementedException();
+        }
+
+        private void StoreMatches(List<Match> matches)
+        {
+            // Implement code to store matches in the database
+            // You need to define a schema for the Matches table and insert match information into it
+            throw new NotImplementedException();
         }
     }
 }
