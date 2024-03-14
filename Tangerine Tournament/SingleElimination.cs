@@ -13,12 +13,16 @@ namespace Tangerine_Tournament
         public string Name { get; set; }
         public string Date { get; set; }
         public string Type { get; set; }
+        public bool IsTeams { get; set; }
+        public Team[] Teams { get; set; }
+        public Player[] Players { get; set; }
 
         public SingleElimination(string name, string date, string type)
         {
             Name = name;
             Date = date;
             Type = type;
+
         }
 
 

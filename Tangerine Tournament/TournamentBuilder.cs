@@ -44,7 +44,7 @@ namespace Tangerine_Tournament
                             command.ExecuteNonQuery();
                         }
 
-                        createTableQuery = $"CREATE TABLE TournamentInfo (Name varchar(255), Date varchar(255), Type varchar(255), MatchLocked BIT DEFAULT 0);";
+                        createTableQuery = $"CREATE TABLE TournamentInfo (Name varchar(255), Date varchar(255), Type varchar(255), MatchLocked BIT DEFAULT 0, IsTeams BIT DEFAULT 0);";
                         using (SqliteCommand command = new SqliteCommand(createTableQuery, connection))
                         {
                             command.ExecuteNonQuery();
