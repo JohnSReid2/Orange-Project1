@@ -109,8 +109,4 @@ namespace Tangerine_Tournament
             Console.WriteLine();
         }
     }
-
-
-
-
 }
