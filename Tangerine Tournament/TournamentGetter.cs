@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tangerine_Tournament.Objects;
 
 namespace Tangerine_Tournament
 {
@@ -196,7 +197,10 @@ namespace Tangerine_Tournament
                             string name = reader.GetString(0);
                             string date = reader.GetString(1);
                             string type = reader.GetString(2);
-                            tournamentInfo = new SingleElimination(name, date, type);
+                            bool matchLocked = reader.GetBoolean(3);
+                            bool isTeams = reader.GetBoolean(3);
+                            int size = reader.GetInt32(4);
+                            tournamentInfo = new SingleElimination(name, date, type, matchLocked, isTeams, size);
                         }
                     }
                 }

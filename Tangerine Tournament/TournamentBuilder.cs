@@ -6,12 +6,13 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Tangerine_Tournament.Objects;
 
 namespace Tangerine_Tournament
 {
     internal class TournamentBuilder
     {
-        public void CreateTournament(string tournamentName, string tournamentType)
+        public void CreateTournament(string tournamentName, string tournamentType, int size)
         {
             
 
@@ -44,25 +45,34 @@ namespace Tangerine_Tournament
                             command.ExecuteNonQuery();
                         }
 
-                        createTableQuery = $"CREATE TABLE TournamentInfo (Name varchar(255), Date varchar(255), Type varchar(255), MatchLocked BIT DEFAULT 0, IsTeams BIT DEFAULT 0);";
-                        using (SqliteCommand command = new SqliteCommand(createTableQuery, connection))
-                        {
-                            command.ExecuteNonQuery();
-                        }
+
+                        
 
                         if (tournamentType == "Single Elimination")
                         {
-                            string editTableQuery = $"INSERT INTO TournamentInfo (Name, Date, Type) VALUES ('{tournamentName}', '{System.DateTime.Now.ToString()}', 'Single Elimination')";
+                            createTableQuery = $"CREATE TABLE TournamentInfo (Name varchar(255), Date varchar(255), Type varchar(255), MatchLocked BIT DEFAULT 0, IsTeams BIT DEFAULT 0, Size int);";
+                            using (SqliteCommand command = new SqliteCommand(createTableQuery, connection))
+                            {
+                                command.ExecuteNonQuery();
+                            }
+
+                            string editTableQuery = $"INSERT INTO TournamentInfo (Name, Date, Type, Size) VALUES ('{tournamentName}', '{System.DateTime.Now.ToString()}', 'Single Elimination', {size})";
                             using (SqliteCommand command = new SqliteCommand(editTableQuery, connection))
                             {
                                 command.ExecuteNonQuery();
                             }
-                            string createTableQuery2 = $"CREATE TABLE Matches (Team1ID int, Team2ID int, WinnerID int);";
+
+                            string createTableQuery2 = $"CREATE TABLE Matches (MatchID int, Contestant1ID int, Contestant2ID int, WinnerID int, Stage int);";
                             using (SqliteCommand command = new SqliteCommand(createTableQuery2, connection))
                             {
                                 command.ExecuteNonQuery();
                             }
                         }
+                        else if (tournamentType == "Round Robin")
+                        {
+
+                        }
+
                         MessageBox.Show("DataBase is Created Sucessfully", "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (System.Exception ex)
@@ -353,7 +363,6 @@ namespace Tangerine_Tournament
                     {
                         command.ExecuteNonQuery();
                     }
-
                     // Recalculate team's average timezone
                     RecalculateTeamAverageTimezone(connection, team.TeamID);
                 }
@@ -389,6 +398,22 @@ namespace Tangerine_Tournament
                     }
                 }
             }
+        }
+
+        public void SetMatchWinner(string tournamentName, int matchId, int winnerID)
+        {
+            string connectionString = $"Data Source={tournamentName}.db";
+            using (SqliteConnection connection = new SqliteConnection())
+            {
+                connection.Open();
+                string deleteTeamQuery = $"Update Matches SET Winner = {winnerID} WHERE MatchID = {matchId}; ";
+                using (SqliteCommand command = new SqliteCommand(deleteTeamQuery, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+
         }
     }
 }

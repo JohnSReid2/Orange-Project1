@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8RVCidk8363jaBTf1O+YPfn8w+Vo6VrmTNDX8XX6s9hPmNFGFjO/M2/YEl7De6EbljKbJgEdDJ/BlDQPu8J0vg==",
+  "dgSpecHash": "/zN++lXGT5ZPotbmcdjvhVoRij9y3j6nVqWGkr439RBNy24y+cv4ulcl82nC3jta7GqShqDcwBMAO2o5NFLpnw==",
   "success": true,
   "projectFilePath": "C:\\Users\\johns\\Documents\\Orange-Project1\\Tangerine Tournament\\Tangerine Tournament.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\johns\\.nuget\\packages\\microsoft.data.sqlite.core\\8.0.2\\microsoft.data.sqlite.core.8.0.2.nupkg.sha512",
     "C:\\Users\\johns\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\johns\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
+    "C:\\Users\\johns\\.nuget\\packages\\realtaiizor\\3.8.0.2\\realtaiizor.3.8.0.2.nupkg.sha512",
     "C:\\Users\\johns\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
     "C:\\Users\\johns\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\johns\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",

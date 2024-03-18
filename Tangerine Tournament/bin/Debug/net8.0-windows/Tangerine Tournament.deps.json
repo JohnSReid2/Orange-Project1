@@ -9,6 +9,7 @@
       "Tangerine Tournament/1.0.0": {
         "dependencies": {
           "Microsoft.Data.Sqlite": "8.0.2",
+          "ReaLTaiizor": "3.8.0.2",
           "System.Data.SqlClient": "4.8.6"
         },
         "runtime": {
@@ -37,6 +38,14 @@
         "dependencies": {
           "System.Security.AccessControl": "4.7.0",
           "System.Security.Principal.Windows": "4.7.0"
+        }
+      },
+      "ReaLTaiizor/3.8.0.2": {
+        "runtime": {
+          "lib/net8.0-windows7.0/ReaLTaiizor.dll": {
+            "assemblyVersion": "3.8.0.2",
+            "fileVersion": "3.8.0.2"
+          }
         }
       },
       "runtime.native.System.Data.SqlClient.sni/4.7.0": {
@@ -281,6 +290,13 @@
       "sha512": "sha512-KSrRMb5vNi0CWSGG1++id2ZOs/1QhRqROt+qgbEAdQuGjGrFcl4AOl4/exGPUYz2wUnU42nvJqon1T3U0kPXLA==",
       "path": "microsoft.win32.registry/4.7.0",
       "hashPath": "microsoft.win32.registry.4.7.0.nupkg.sha512"
+    },
+    "ReaLTaiizor/3.8.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jlCo02R8T9Ks/hY95to+bA0aKsp2rv16yWn2+qjfzm6u6FOhPdiAmbUiKjaEv/kX1+HX5J9Ms9RCYNT6trrTfg==",
+      "path": "realtaiizor/3.8.0.2",
+      "hashPath": "realtaiizor.3.8.0.2.nupkg.sha512"
     },
     "runtime.native.System.Data.SqlClient.sni/4.7.0": {
       "type": "package",

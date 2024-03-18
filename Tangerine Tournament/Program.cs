@@ -1,4 +1,5 @@
 using System;
+using Tangerine_Tournament.Objects;
 
 namespace Tangerine_Tournament
 {
@@ -6,7 +7,10 @@ namespace Tangerine_Tournament
     {
         static void Main(string[] args)
         {
+            MainForm main = new MainForm();
+            Application.Run(main);
             // Create instances of players
+            /*
             Player player1 = new Player(1, "John", "Doe", 5, "JohnDoe", "john@example.com");
             Player player2 = new Player(2, "Jane", "Smith", 3, "JaneSmith", "jane@example.com");
             Player player3 = new Player(3, "Mike", "Johnson", 8, "MikeJohnson", "mike@example.com");
@@ -25,7 +29,7 @@ namespace Tangerine_Tournament
 
             // Create a tournament
             string tournamentName = "Tournament5";
-            tournamentBuilder.CreateTournament(tournamentName, "Single Elimination");
+            tournamentBuilder.CreateTournament(tournamentName, "Single Elimination", 32);
 
             // Add players and teams to the tournament
             tournamentBuilder.AddPlayer(tournamentName, player1);
@@ -55,14 +59,15 @@ namespace Tangerine_Tournament
 
             TestPlayerAndTeam();
             TestTournamentInfo();
+            */
         }
 
         static void TestPlayerAndTeam()
         {
             // Load player and team information
             Tangerine_Tournament.TournamentGetter tournamentGetter = new Tangerine_Tournament.TournamentGetter("SampleTournament");
-            Tangerine_Tournament.Player player = tournamentGetter.GetPlayer(1);
-            Tangerine_Tournament.Team team = tournamentGetter.GetTeam(1);
+            Player player = tournamentGetter.GetPlayer(1);
+            Team team = tournamentGetter.GetTeam(1);
 
             // Display player and team information
             Console.WriteLine("Player Information:");
