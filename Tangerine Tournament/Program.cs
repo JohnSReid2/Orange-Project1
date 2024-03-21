@@ -61,13 +61,13 @@ namespace Tangerine_Tournament
             TestTournamentInfo();
             */
         }
-
+        /*
         static void TestPlayerAndTeam()
         {
-            // Load player and team information
+             Load player and team information
             Tangerine_Tournament.TournamentGetter tournamentGetter = new Tangerine_Tournament.TournamentGetter("SampleTournament");
             Player player = tournamentGetter.GetPlayer(1);
-            Team team = tournamentGetter.GetTeam(1);
+            //Team team = tournamentGetter.GetTeam(1);
 
             // Display player and team information
             Console.WriteLine("Player Information:");
@@ -82,8 +82,8 @@ namespace Tangerine_Tournament
         static void TestTournamentInfo()
         {
             // Load tournament information
-            Tangerine_Tournament.TournamentGetter tournamentGetter = new Tangerine_Tournament.TournamentGetter("SampleTournament");
-            Tangerine_Tournament.SingleElimination tournamentInfo = tournamentGetter.GetTournamentInfo();
+            //Tangerine_Tournament.TournamentGetter tournamentGetter = new Tangerine_Tournament.TournamentGetter("SampleTournament");
+            //Tangerine_Tournament.SingleElimination tournamentInfo = tournamentGetter.GetTournamentInfo();
 
             // Display tournament information
             Console.WriteLine("Tournament Information:");
@@ -92,5 +92,6 @@ namespace Tangerine_Tournament
             Console.WriteLine($"Type: {tournamentInfo.Type}");
             Console.WriteLine();
         }
+        */
     }
 }

@@ -1,5 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
-using Microsoft.VisualBasic.Logging;
+﻿using Microsoft.VisualBasic.Logging;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
@@ -45,13 +45,13 @@ namespace Tangerine_Tournament
 
         public void GenerateMatches()
         {
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 string query = "SELECT MAX(Stage) FROM Matches";
-                using (SqliteCommand command = new SqliteCommand(query, connection))
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    using (SqliteDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -67,11 +67,11 @@ namespace Tangerine_Tournament
                 return;
             }
 
-            TournamentGetter getter = new TournamentGetter(Name);
+            TournamentGetter getter = new TournamentGetter();
             
             if (IsTeams)
             {
-                List<Team> teams = getter.GetTeams();
+                List<Team> teams = getter.GetTeams(connectionString);
                 if (teams.Count != Size)
                 {
                     MessageBox.Show("Unable to generate matches. Amount of teams not equal to the tournament size.");
@@ -94,11 +94,11 @@ namespace Tangerine_Tournament
                         }
                         foreach (TeamMatch match in matches)
                         {
-                            using (SqliteConnection connection = new SqliteConnection(connectionString))
+                            using (MySqlConnection connection = new MySqlConnection(connectionString))
                             {
                                 connection.Open();
                                 string editTableQuery = $"INSERT INTO Matches (Contestant1ID, Contestant2ID, Stage) VALUES ({match.Team1.TeamID}, {match.Team2.TeamID}, 1)";
-                                using (SqliteCommand command = new SqliteCommand(editTableQuery, connection))
+                                using (MySqlCommand command = new MySqlCommand(editTableQuery, connection))
                                 {
                                     command.ExecuteNonQuery();
                                 }
@@ -110,7 +110,7 @@ namespace Tangerine_Tournament
             }
             else
             {
-                List<Player> players = getter.GetPlayers();
+                List<Player> players = getter.GetPlayers(connectionString);
                 if (players.Count != Size)
                 {
                     MessageBox.Show("Unable to generate matches. Amount of players not equal to the tournament size.");
@@ -133,11 +133,11 @@ namespace Tangerine_Tournament
                         }
                         foreach (PlayerMatch match in matches)
                         {
-                            using (SqliteConnection connection = new SqliteConnection(connectionString))
+                            using (MySqlConnection connection = new MySqlConnection(connectionString))
                             {
                                 connection.Open();
                                 string editTableQuery = $"INSERT INTO Matches (Contestant1ID, Contestant2ID, stage) VALUES ({match.Player1.Id}, {match.Player2.Id}, 1)";
-                                using (SqliteCommand command = new SqliteCommand(editTableQuery, connection))
+                                using (MySqlCommand command = new MySqlCommand(editTableQuery, connection))
                                 {
                                     command.ExecuteNonQuery();
                                 }
@@ -151,15 +151,15 @@ namespace Tangerine_Tournament
         }
         public void GenerateNextRound()
         {
-            TournamentGetter getter = new TournamentGetter(Name);
+            TournamentGetter getter = new TournamentGetter();
 
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 string query = "SELECT MAX(Stage) FROM Matches";
-                using (SqliteCommand command = new SqliteCommand(query, connection))
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    using (SqliteDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -173,17 +173,17 @@ namespace Tangerine_Tournament
             {
                 List<Team> teams = new List<Team>();
 
-                using (SqliteConnection connection = new SqliteConnection(connectionString))
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
                     string query = $"SELECT Winner FROM Matches WHERE Stage = {Stage - 1}";
-                    using (SqliteCommand command = new SqliteCommand(query, connection))
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        using (SqliteDataReader reader = command.ExecuteReader())
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                teams.Add(getter.GetTeam(reader.GetInt32(0)));
+                                teams.Add(getter.GetTeam(reader.GetInt32(0), connectionString));
                             }
                         }
                     }
@@ -204,11 +204,11 @@ namespace Tangerine_Tournament
                     }
                     foreach (TeamMatch match in matches)
                     {
-                        using (SqliteConnection connection = new SqliteConnection(connectionString))
+                        using (MySqlConnection connection = new MySqlConnection(connectionString))
                         {
                             connection.Open();
                             string editTableQuery = $"INSERT INTO Matches (Contestant1ID, Contestant2ID, Stage) VALUES ({match.Team1.TeamID}, {match.Team2.TeamID}, 1)";
-                            using (SqliteCommand command = new SqliteCommand(editTableQuery, connection))
+                            using (MySqlCommand command = new MySqlCommand(editTableQuery, connection))
                             {
                                 command.ExecuteNonQuery();
                             }
@@ -221,17 +221,17 @@ namespace Tangerine_Tournament
             {
                 List<Player> players = new List<Player>();
 
-                using (SqliteConnection connection = new SqliteConnection(connectionString))
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
                     string query = $"SELECT Winner FROM Matches WHERE Stage = {Stage - 1}";
-                    using (SqliteCommand command = new SqliteCommand(query, connection))
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        using (SqliteDataReader reader = command.ExecuteReader())
+                        using (var reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                players.Add(getter.GetPlayer(reader.GetInt32(0)));
+                                players.Add(getter.GetPlayer(reader.GetInt32(0), connectionString));
                             }
                         }
                     }
@@ -253,11 +253,11 @@ namespace Tangerine_Tournament
                     }
                     foreach (PlayerMatch match in matches)
                     {
-                        using (SqliteConnection connection = new SqliteConnection(connectionString))
+                        using (MySqlConnection connection = new MySqlConnection(connectionString))
                         {
                             connection.Open();
                             string editTableQuery = $"INSERT INTO Matches (Contestant1ID, Contestant2ID, stage) VALUES ({match.Player1.Id}, {match.Player2.Id}, 1)";
-                            using (SqliteCommand command = new SqliteCommand(editTableQuery, connection))
+                            using (MySqlCommand command = new MySqlCommand(editTableQuery, connection))
                             {
                                 command.ExecuteNonQuery();
                             }

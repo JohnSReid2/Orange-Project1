@@ -1,5 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -7,103 +6,100 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Tangerine_Tournament.Objects;
+using MySql;
+using MySql.Data.MySqlClient;
 
 namespace Tangerine_Tournament
 {
     internal class TournamentBuilder
     {
-        public void CreateTournament(string tournamentName, string tournamentType, int size)
+        public void CreateTournament(MySqlConnection connection, string tournamentType, int size, string tournamentName)
         {
-            
-
-            if (tournamentName != null && !File.Exists(tournamentName + ".db"))
+            try
             {
+                //Create and Use Database
+                string createDatabaseQuery = $"CREATE DATABASE {tournamentName};";
 
-                string connectionString = $"Data Source={tournamentName}.db";
-
-                using (SqliteConnection connection = new SqliteConnection(connectionString))
+                using (MySqlCommand command = new MySqlCommand(createDatabaseQuery, connection))
                 {
-                    connection.Open();
-                    try
-                    {
-                        string createTableQuery = "CREATE TABLE Players (PlayerID int PRIMARY KEY, FirstName varchar(255), LastName varchar(255), Gamertag varchar(255), Timezone int, Email varchar(255));";
-
-                        using (SqliteCommand command = new SqliteCommand(createTableQuery, connection))
-                        {
-                            command.ExecuteNonQuery();
-                        }
-
-                        createTableQuery = $"CREATE TABLE Teams (TeamID int PRIMARY KEY,TeamName varchar(255), TeamCaptainID int, Timezone int, FOREIGN KEY (TeamCaptainID) REFERENCES Players(PlayerID));";
-                        using (SqliteCommand command = new SqliteCommand(createTableQuery, connection))
-                        {
-                            command.ExecuteNonQuery();
-                        }
-
-                        createTableQuery = $"CREATE TABLE PlayerTeams (TeamID int, PlayerID int, PRIMARY KEY (TeamID, PlayerID), FOREIGN KEY (TeamID) REFERENCES Teams(TeamID), FOREIGN KEY (PlayerID) REFERENCES Players(PlayerID));";
-                        using (SqliteCommand command = new SqliteCommand(createTableQuery, connection))
-                        {
-                            command.ExecuteNonQuery();
-                        }
-
-
-                        
-
-                        if (tournamentType == "Single Elimination")
-                        {
-                            createTableQuery = $"CREATE TABLE TournamentInfo (Name varchar(255), Date varchar(255), Type varchar(255), MatchLocked BIT DEFAULT 0, IsTeams BIT DEFAULT 0, Size int);";
-                            using (SqliteCommand command = new SqliteCommand(createTableQuery, connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-
-                            string editTableQuery = $"INSERT INTO TournamentInfo (Name, Date, Type, Size) VALUES ('{tournamentName}', '{System.DateTime.Now.ToString()}', 'Single Elimination', {size})";
-                            using (SqliteCommand command = new SqliteCommand(editTableQuery, connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-
-                            string createTableQuery2 = $"CREATE TABLE Matches (MatchID int, Contestant1ID int, Contestant2ID int, WinnerID int, Stage int);";
-                            using (SqliteCommand command = new SqliteCommand(createTableQuery2, connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-                        }
-                        else if (tournamentType == "Round Robin")
-                        {
-
-                        }
-
-                        MessageBox.Show("DataBase is Created Sucessfully", "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (System.Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString(), "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    finally
-                    {
-                        if (connection.State == ConnectionState.Open)
-                        {
-                            connection.Close();
-                        }
-                    }
+                    command.ExecuteNonQuery();
                 }
+
+                string useQuery = $"USE {tournamentName}";
+                using (MySqlCommand command = new MySqlCommand(useQuery, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+
+                //Create Tables
+                string createTableQuery = "CREATE TABLE Players (PlayerID int PRIMARY KEY, FirstName varchar(255), LastName varchar(255), Gamertag varchar(255), Timezone int, Email varchar(255));";
+
+                using (MySqlCommand command = new MySqlCommand(createTableQuery, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+                createTableQuery = $"CREATE TABLE Teams (TeamID int PRIMARY KEY,TeamName varchar(255), TeamCaptainID int, Timezone int, FOREIGN KEY (TeamCaptainID) REFERENCES Players(PlayerID));";
+                using (MySqlCommand command = new MySqlCommand(createTableQuery, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+                createTableQuery = $"CREATE TABLE PlayerTeams (TeamID int, PlayerID int, PRIMARY KEY (TeamID, PlayerID), FOREIGN KEY (TeamID) REFERENCES Teams(TeamID), FOREIGN KEY (PlayerID) REFERENCES Players(PlayerID));";
+                using (MySqlCommand command = new MySqlCommand(createTableQuery, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+                createTableQuery = $"CREATE TABLE TournamentInfo (Name varchar(255), Date varchar(255), Type varchar(255), MatchLocked BIT DEFAULT 0, IsTeams BIT DEFAULT 0, Size int);";
+                using (MySqlCommand command = new MySqlCommand(createTableQuery, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+
+                //Populate Tables
+
+                string editTableQuery = $"INSERT INTO TournamentInfo (Name, Date, Type, Size) VALUES ('{tournamentName}', '{System.DateTime.Now.ToString()}', '{tournamentType}', {size});";
+                using (MySqlCommand command = new MySqlCommand(editTableQuery, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+                string createTableQuery2 = $"CREATE TABLE Matches (MatchID int, Contestant1ID int, Contestant2ID int, WinnerID int, Stage int);";
+                using (MySqlCommand command = new MySqlCommand(createTableQuery2, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+
+                if (tournamentType == "Single Elimination")
+                {
+
+                }
+                else if (tournamentType == "Round Robin")
+                {
+
+                }
+                MessageBox.Show("DataBase is Created Sucessfully", "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else
+            catch (System.Exception ex)
             {
-                MessageBox.Show("The tournament name entered is either invalid, or already exists. Please enter a valid tournament name.");
+                MessageBox.Show(ex.ToString(), "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         public void AddPlayer (string tournamentName, Player player)
         {
             string connectionString = $"Data Source={tournamentName}.db";
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 try
                 {
                     string editTableQuery = $"INSERT INTO Players (PlayerID, FirstName, LastName, Gamertag, Timezone, Email) VALUES ({player.Id}, '{player.FirstName}', '{player.LastName}', '{player.GamerTag}', '{player.Timezone}', '{player.EmailAddress}')";
-                    using (SqliteCommand command = new SqliteCommand(editTableQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(editTableQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
@@ -125,13 +121,13 @@ namespace Tangerine_Tournament
         public void AddTeam(string tournamentName, Team team)
         {
             string connectionString = $"Data Source={tournamentName}.db";
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 try
                 {
                     string editTableQuery = $"INSERT INTO Teams (TeamID, TeamName, TeamCaptainID) VALUES ({team.TeamID}, '{team.TeamName}', {team.TeamCaptain.Id})";
-                    using (SqliteCommand command = new SqliteCommand(editTableQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(editTableQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
@@ -155,7 +151,7 @@ namespace Tangerine_Tournament
         public void AssignPlayers(string tournamentName, Team team)
         {
             string connectionString = $"Data Source={tournamentName}.db";
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 try
@@ -163,7 +159,7 @@ namespace Tangerine_Tournament
                     for (int i = 0; i < team.Players.Count; i++)
                     {
                         string editTableQuery = $"INSERT INTO PlayerTeams (PlayerID, TeamID) VALUES ({team.Players[i].Id}, {team.TeamID})";
-                        using (SqliteCommand command = new SqliteCommand(editTableQuery, connection))
+                        using (MySqlCommand command = new MySqlCommand(editTableQuery, connection))
                         {
                             command.ExecuteNonQuery();
                         }
@@ -173,7 +169,7 @@ namespace Tangerine_Tournament
                     team.CalculateAverageTimezone();
 
                     string updateAverageTimezoneQuery = $"UPDATE Teams SET Timezone = {team.AverageTimezone} WHERE TeamID = {team.TeamID}";
-                    using (SqliteCommand command = new SqliteCommand(updateAverageTimezoneQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(updateAverageTimezoneQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
@@ -195,13 +191,13 @@ namespace Tangerine_Tournament
         public void AssignPlayer(string tournamentName, Team team, Player player)
         {
             string connectionString = $"Data Source={tournamentName}.db";
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 try
                 {
                     string editTableQuery = $"INSERT INTO PlayerTeams (PlayerID, TeamID) VALUES ({player.Id}, {team.TeamID})";
-                    using (SqliteCommand command = new SqliteCommand(editTableQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(editTableQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
@@ -209,7 +205,7 @@ namespace Tangerine_Tournament
                     team.CalculateAverageTimezone();
 
                     string updateAverageTimezoneQuery = $"UPDATE Teams SET Timezone = {team.AverageTimezone} WHERE TeamID = {team.TeamID}";
-                    using (SqliteCommand command = new SqliteCommand(updateAverageTimezoneQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(updateAverageTimezoneQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
@@ -232,21 +228,21 @@ namespace Tangerine_Tournament
         public void RemovePlayer(string tournamentName, Player player)
         {
             string connectionString = $"Data Source={tournamentName}.db";
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 try
                 {
                     // Remove the player from the PlayerTeams table first
                     string deletePlayerTeamsQuery = $"DELETE FROM PlayerTeams WHERE PlayerID = {player.Id}";
-                    using (SqliteCommand command = new SqliteCommand(deletePlayerTeamsQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(deletePlayerTeamsQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
 
                     // Then remove the player from the Players table
                     string deletePlayerQuery = $"DELETE FROM Players WHERE PlayerID = {player.Id}";
-                    using (SqliteCommand command = new SqliteCommand(deletePlayerQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(deletePlayerQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
@@ -268,21 +264,21 @@ namespace Tangerine_Tournament
         public void RemoveTeam(string tournamentName, Team team)
         {
             string connectionString = $"Data Source={tournamentName}.db";
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 try
                 {
                     // Remove the team from the PlayerTeams table first
                     string deletePlayerTeamsQuery = $"DELETE FROM PlayerTeams WHERE TeamID = {team.TeamID}";
-                    using (SqliteCommand command = new SqliteCommand(deletePlayerTeamsQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(deletePlayerTeamsQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
 
                     // Then remove the team from the Teams table
                     string deleteTeamQuery = $"DELETE FROM Teams WHERE TeamID = {team.TeamID}";
-                    using (SqliteCommand command = new SqliteCommand(deleteTeamQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(deleteTeamQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
@@ -304,7 +300,7 @@ namespace Tangerine_Tournament
         public void UpdatePlayer(string tournamentName, Player player)
         {
             string connectionString = $"Data Source={tournamentName}.db";
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 try
@@ -313,16 +309,16 @@ namespace Tangerine_Tournament
                     string updatePlayerQuery = $"UPDATE Players SET FirstName = '{player.FirstName}', LastName = '{player.LastName}', Gamertag = '{player.GamerTag}', Timezone = {player.Timezone}, Email = '{player.EmailAddress}' WHERE PlayerID = {player.Id}";
 
                     // Execute the UPDATE query
-                    using (SqliteCommand command = new SqliteCommand(updatePlayerQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(updatePlayerQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
 
                     // Check if the player is in a team
                     string checkPlayerTeamQuery = $"SELECT TeamID FROM PlayerTeams WHERE PlayerID = {player.Id}";
-                    using (SqliteCommand command = new SqliteCommand(checkPlayerTeamQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(checkPlayerTeamQuery, connection))
                     {
-                        using (SqliteDataReader reader = command.ExecuteReader())
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
                             {
@@ -350,7 +346,7 @@ namespace Tangerine_Tournament
         public void UpdateTeam(string tournamentName, Team team)
         {
             string connectionString = $"Data Source={tournamentName}.db";
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 try
@@ -359,7 +355,7 @@ namespace Tangerine_Tournament
                     string updateTeamQuery = $"UPDATE Teams SET TeamName = '{team.TeamName}', TeamCaptainID = {team.TeamCaptain.Id} WHERE TeamID = {team.TeamID}";
 
                     // Execute the UPDATE query
-                    using (SqliteCommand command = new SqliteCommand(updateTeamQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(updateTeamQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
@@ -381,10 +377,10 @@ namespace Tangerine_Tournament
         }
 
         // Helper method to recalculate team's average timezone
-        private void RecalculateTeamAverageTimezone(SqliteConnection connection, int teamID)
+        private void RecalculateTeamAverageTimezone(MySqlConnection connection, int teamID)
         {
             string calculateAverageTimezoneQuery = $"SELECT AVG(Timezone) FROM Players WHERE PlayerID IN (SELECT PlayerID FROM PlayerTeams WHERE TeamID = {teamID})";
-            using (SqliteCommand command = new SqliteCommand(calculateAverageTimezoneQuery, connection))
+            using (MySqlCommand command = new MySqlCommand(calculateAverageTimezoneQuery, connection))
             {
                 object result = command.ExecuteScalar();
                 if (result != DBNull.Value && result != null)
@@ -392,7 +388,7 @@ namespace Tangerine_Tournament
                     double averageTimezone = Convert.ToDouble(result);
                     // Update the team's average timezone in the database
                     string updateTeamAverageTimezoneQuery = $"UPDATE Teams SET Timezone = {averageTimezone} WHERE TeamID = {teamID}";
-                    using (SqliteCommand updateCommand = new SqliteCommand(updateTeamAverageTimezoneQuery, connection))
+                    using (MySqlCommand updateCommand = new MySqlCommand(updateTeamAverageTimezoneQuery, connection))
                     {
                         updateCommand.ExecuteNonQuery();
                     }
@@ -403,11 +399,11 @@ namespace Tangerine_Tournament
         public void SetMatchWinner(string tournamentName, int matchId, int winnerID)
         {
             string connectionString = $"Data Source={tournamentName}.db";
-            using (SqliteConnection connection = new SqliteConnection())
+            using (MySqlConnection connection = new MySqlConnection())
             {
                 connection.Open();
                 string deleteTeamQuery = $"Update Matches SET Winner = {winnerID} WHERE MatchID = {matchId}; ";
-                using (SqliteCommand command = new SqliteCommand(deleteTeamQuery, connection))
+                using (MySqlCommand command = new MySqlCommand (deleteTeamQuery, connection))
                 {
                     command.ExecuteNonQuery();
                 }

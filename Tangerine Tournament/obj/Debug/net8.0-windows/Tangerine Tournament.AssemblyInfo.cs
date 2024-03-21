@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Tangerine Tournament")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f8f83afea43b8f4b5f0394c925b336aff7daa74")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+620b31c95ec24902f84dede50d3025add849fc79")]
 [assembly: System.Reflection.AssemblyProductAttribute("Tangerine Tournament")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Tangerine Tournament")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

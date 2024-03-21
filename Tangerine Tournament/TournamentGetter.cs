@@ -1,32 +1,28 @@
-﻿using Microsoft.Data.Sqlite;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tangerine_Tournament.Objects;
+using MySql;
+
+using MySql.Data.MySqlClient;
 
 namespace Tangerine_Tournament
 {
     internal class TournamentGetter
     {
-        private string connectionString;
 
-        public TournamentGetter(string tournamentName)
-        {
-            connectionString = $"Data Source={tournamentName}.db";
-        }
-
-        public List<Player> GetPlayers()
+        public List<Player> GetPlayers(string connectionString)
         {
             List<Player> players = new List<Player>();
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 string query = "SELECT * FROM Players";
-                using (SqliteCommand command = new SqliteCommand(query, connection))
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    using (SqliteDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -45,16 +41,16 @@ namespace Tangerine_Tournament
             return players;
         }
 
-        public List<Team> GetTeams()
+        public List<Team> GetTeams(string connectionString)
         {
             List<Team> teams = new List<Team>();
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 string query = "SELECT * FROM Teams";
-                using (SqliteCommand command = new SqliteCommand(query, connection))
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    using (SqliteDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -68,21 +64,21 @@ namespace Tangerine_Tournament
                 }
             }
             // Populate team captains
-            PopulateTeamCaptains(teams);
+            PopulateTeamCaptains(teams, connectionString);
             return teams;
         }
 
-        private void PopulateTeamCaptains(List<Team> teams)
+        private void PopulateTeamCaptains(List<Team> teams, string connectionString)
         {
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 foreach (var team in teams)
                 {
                     string query = $"SELECT * FROM Players WHERE PlayerID = {team.TeamCaptain.Id}";
-                    using (SqliteCommand command = new SqliteCommand(query, connection))
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        using (SqliteDataReader reader = command.ExecuteReader())
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
                             {
@@ -101,16 +97,16 @@ namespace Tangerine_Tournament
             }
         }
 
-        public Player GetPlayer(int playerId)
+        public Player GetPlayer(int playerId, string connectionString)
         {
             Player player = null;
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 string query = $"SELECT * FROM Players WHERE PlayerID = {playerId}";
-                using (SqliteCommand command = new SqliteCommand(query, connection))
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    using (SqliteDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -127,16 +123,16 @@ namespace Tangerine_Tournament
             return player;
         }
 
-        public Team GetTeam(int teamId)
+        public Team GetTeam(int teamId, string connectionString)
         {
             Team team = null;
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 string query = $"SELECT * FROM Teams WHERE TeamID = {teamId}";
-                using (SqliteCommand command = new SqliteCommand(query, connection))
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    using (SqliteDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -149,21 +145,21 @@ namespace Tangerine_Tournament
                 if (team != null)
                 {
                     // Populate team captain
-                    PopulateTeamCaptain(team);
+                    PopulateTeamCaptain(team, connectionString);
                 }
             }
             return team;
         }
 
-        private void PopulateTeamCaptain(Team team)
+        private void PopulateTeamCaptain(Team team, string connectionString)
         {
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 string query = $"SELECT * FROM Players WHERE PlayerID = {team.TeamCaptain.Id}";
-                using (SqliteCommand command = new SqliteCommand(query, connection))
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    using (SqliteDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -181,16 +177,16 @@ namespace Tangerine_Tournament
             }
         }
 
-        public SingleElimination GetTournamentInfo()
+        public SingleElimination GetTournamentInfo(string connectionString)
         {
             SingleElimination tournamentInfo = null;
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 string query = $"SELECT * FROM TournamentInfo";
-                using (SqliteCommand command = new SqliteCommand(query, connection))
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    using (SqliteDataReader reader = command.ExecuteReader())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
