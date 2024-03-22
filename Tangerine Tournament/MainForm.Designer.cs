@@ -54,6 +54,20 @@
             txtTournamentName = new ReaLTaiizor.Controls.TextBoxEdit();
             labelEdit6 = new ReaLTaiizor.Controls.LabelEdit();
             infoPage = new TabPage();
+            btnUpdateInfo = new ReaLTaiizor.Controls.Button();
+            btnPopulateInfo = new ReaLTaiizor.Controls.Button();
+            labelEdit12 = new ReaLTaiizor.Controls.LabelEdit();
+            checkIsLockedInfo = new CheckBox();
+            checkIsTeamsInfo = new CheckBox();
+            txtSizeInfo = new ReaLTaiizor.Controls.TextBoxEdit();
+            labelEdit11 = new ReaLTaiizor.Controls.LabelEdit();
+            txtTypeInfo = new ReaLTaiizor.Controls.TextBoxEdit();
+            labelEdit10 = new ReaLTaiizor.Controls.LabelEdit();
+            txtDateInfo = new ReaLTaiizor.Controls.TextBoxEdit();
+            labelEdit9 = new ReaLTaiizor.Controls.LabelEdit();
+            txtNameInfo = new ReaLTaiizor.Controls.TextBoxEdit();
+            labelEdit5 = new ReaLTaiizor.Controls.LabelEdit();
+            Infomation = new ReaLTaiizor.Controls.BigLabel();
             playerPage = new TabPage();
             teamPage = new TabPage();
             matchPage = new TabPage();
@@ -65,6 +79,7 @@
             connectionPage.SuspendLayout();
             createPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numTournamentSize).BeginInit();
+            infoPage.SuspendLayout();
             panelHeader.SuspendLayout();
             SuspendLayout();
             // 
@@ -468,6 +483,20 @@
             // infoPage
             // 
             infoPage.BackColor = Color.Transparent;
+            infoPage.Controls.Add(btnUpdateInfo);
+            infoPage.Controls.Add(btnPopulateInfo);
+            infoPage.Controls.Add(labelEdit12);
+            infoPage.Controls.Add(checkIsLockedInfo);
+            infoPage.Controls.Add(checkIsTeamsInfo);
+            infoPage.Controls.Add(txtSizeInfo);
+            infoPage.Controls.Add(labelEdit11);
+            infoPage.Controls.Add(txtTypeInfo);
+            infoPage.Controls.Add(labelEdit10);
+            infoPage.Controls.Add(txtDateInfo);
+            infoPage.Controls.Add(labelEdit9);
+            infoPage.Controls.Add(txtNameInfo);
+            infoPage.Controls.Add(labelEdit5);
+            infoPage.Controls.Add(Infomation);
             infoPage.Location = new Point(124, 4);
             infoPage.Margin = new Padding(2);
             infoPage.Name = "infoPage";
@@ -475,6 +504,204 @@
             infoPage.Size = new Size(672, 452);
             infoPage.TabIndex = 1;
             infoPage.Text = "Info";
+            // 
+            // btnUpdateInfo
+            // 
+            btnUpdateInfo.BackColor = Color.Transparent;
+            btnUpdateInfo.BorderColor = Color.FromArgb(32, 34, 37);
+            btnUpdateInfo.EnteredBorderColor = Color.FromArgb(165, 37, 37);
+            btnUpdateInfo.EnteredColor = Color.FromArgb(32, 34, 37);
+            btnUpdateInfo.Font = new Font("Microsoft Sans Serif", 12F);
+            btnUpdateInfo.Image = null;
+            btnUpdateInfo.ImageAlign = ContentAlignment.MiddleLeft;
+            btnUpdateInfo.InactiveColor = Color.FromArgb(32, 34, 37);
+            btnUpdateInfo.Location = new Point(544, 240);
+            btnUpdateInfo.Name = "btnUpdateInfo";
+            btnUpdateInfo.PressedBorderColor = Color.FromArgb(165, 37, 37);
+            btnUpdateInfo.PressedColor = Color.FromArgb(165, 37, 37);
+            btnUpdateInfo.Size = new Size(120, 43);
+            btnUpdateInfo.TabIndex = 15;
+            btnUpdateInfo.Text = "Update Info";
+            btnUpdateInfo.TextAlignment = StringAlignment.Center;
+            btnUpdateInfo.Click += btnUpdateInfo_Click;
+            // 
+            // btnPopulateInfo
+            // 
+            btnPopulateInfo.BackColor = Color.Transparent;
+            btnPopulateInfo.BorderColor = Color.FromArgb(32, 34, 37);
+            btnPopulateInfo.EnteredBorderColor = Color.FromArgb(165, 37, 37);
+            btnPopulateInfo.EnteredColor = Color.FromArgb(32, 34, 37);
+            btnPopulateInfo.Font = new Font("Microsoft Sans Serif", 12F);
+            btnPopulateInfo.Image = null;
+            btnPopulateInfo.ImageAlign = ContentAlignment.MiddleLeft;
+            btnPopulateInfo.InactiveColor = Color.FromArgb(32, 34, 37);
+            btnPopulateInfo.Location = new Point(544, 317);
+            btnPopulateInfo.Name = "btnPopulateInfo";
+            btnPopulateInfo.PressedBorderColor = Color.FromArgb(165, 37, 37);
+            btnPopulateInfo.PressedColor = Color.FromArgb(165, 37, 37);
+            btnPopulateInfo.Size = new Size(120, 43);
+            btnPopulateInfo.TabIndex = 14;
+            btnPopulateInfo.Text = "Load Info";
+            btnPopulateInfo.TextAlignment = StringAlignment.Center;
+            // 
+            // labelEdit12
+            // 
+            labelEdit12.AutoSize = true;
+            labelEdit12.BackColor = Color.Transparent;
+            labelEdit12.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelEdit12.ForeColor = Color.FromArgb(116, 125, 132);
+            labelEdit12.Location = new Point(5, 370);
+            labelEdit12.Name = "labelEdit12";
+            labelEdit12.Size = new Size(62, 24);
+            labelEdit12.TabIndex = 13;
+            labelEdit12.Text = "Other:";
+            // 
+            // checkIsLockedInfo
+            // 
+            checkIsLockedInfo.AutoSize = true;
+            checkIsLockedInfo.ForeColor = Color.FromArgb(116, 125, 132);
+            checkIsLockedInfo.Location = new Point(5, 400);
+            checkIsLockedInfo.Name = "checkIsLockedInfo";
+            checkIsLockedInfo.Size = new Size(85, 25);
+            checkIsLockedInfo.TabIndex = 12;
+            checkIsLockedInfo.Text = "Locked?";
+            checkIsLockedInfo.UseVisualStyleBackColor = true;
+            // 
+            // checkIsTeamsInfo
+            // 
+            checkIsTeamsInfo.AutoSize = true;
+            checkIsTeamsInfo.ForeColor = Color.FromArgb(116, 125, 132);
+            checkIsTeamsInfo.Location = new Point(113, 400);
+            checkIsTeamsInfo.Name = "checkIsTeamsInfo";
+            checkIsTeamsInfo.Size = new Size(79, 25);
+            checkIsTeamsInfo.TabIndex = 11;
+            checkIsTeamsInfo.Text = "Teams?";
+            checkIsTeamsInfo.UseVisualStyleBackColor = true;
+            // 
+            // txtSizeInfo
+            // 
+            txtSizeInfo.BackColor = Color.Transparent;
+            txtSizeInfo.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSizeInfo.ForeColor = Color.FromArgb(176, 183, 191);
+            txtSizeInfo.Image = null;
+            txtSizeInfo.Location = new Point(5, 317);
+            txtSizeInfo.MaxLength = 32767;
+            txtSizeInfo.Multiline = false;
+            txtSizeInfo.Name = "txtSizeInfo";
+            txtSizeInfo.ReadOnly = false;
+            txtSizeInfo.Size = new Size(420, 43);
+            txtSizeInfo.TabIndex = 10;
+            txtSizeInfo.TextAlignment = HorizontalAlignment.Left;
+            txtSizeInfo.UseSystemPasswordChar = false;
+            // 
+            // labelEdit11
+            // 
+            labelEdit11.AutoSize = true;
+            labelEdit11.BackColor = Color.Transparent;
+            labelEdit11.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelEdit11.ForeColor = Color.FromArgb(116, 125, 132);
+            labelEdit11.Location = new Point(5, 290);
+            labelEdit11.Name = "labelEdit11";
+            labelEdit11.Size = new Size(159, 24);
+            labelEdit11.TabIndex = 9;
+            labelEdit11.Text = "Tournament Size:";
+            // 
+            // txtTypeInfo
+            // 
+            txtTypeInfo.AllowDrop = true;
+            txtTypeInfo.BackColor = Color.Transparent;
+            txtTypeInfo.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtTypeInfo.ForeColor = Color.FromArgb(176, 183, 191);
+            txtTypeInfo.Image = null;
+            txtTypeInfo.Location = new Point(5, 240);
+            txtTypeInfo.MaxLength = 32767;
+            txtTypeInfo.Multiline = false;
+            txtTypeInfo.Name = "txtTypeInfo";
+            txtTypeInfo.ReadOnly = true;
+            txtTypeInfo.Size = new Size(420, 43);
+            txtTypeInfo.TabIndex = 8;
+            txtTypeInfo.TextAlignment = HorizontalAlignment.Left;
+            txtTypeInfo.UseSystemPasswordChar = false;
+            // 
+            // labelEdit10
+            // 
+            labelEdit10.AutoSize = true;
+            labelEdit10.BackColor = Color.Transparent;
+            labelEdit10.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelEdit10.ForeColor = Color.FromArgb(116, 125, 132);
+            labelEdit10.Location = new Point(5, 210);
+            labelEdit10.Name = "labelEdit10";
+            labelEdit10.Size = new Size(166, 24);
+            labelEdit10.TabIndex = 7;
+            labelEdit10.Text = "Tournament Type:";
+            // 
+            // txtDateInfo
+            // 
+            txtDateInfo.BackColor = Color.Transparent;
+            txtDateInfo.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtDateInfo.ForeColor = Color.FromArgb(176, 183, 191);
+            txtDateInfo.Image = null;
+            txtDateInfo.Location = new Point(5, 160);
+            txtDateInfo.MaxLength = 32767;
+            txtDateInfo.Multiline = false;
+            txtDateInfo.Name = "txtDateInfo";
+            txtDateInfo.ReadOnly = false;
+            txtDateInfo.Size = new Size(420, 43);
+            txtDateInfo.TabIndex = 6;
+            txtDateInfo.TextAlignment = HorizontalAlignment.Left;
+            txtDateInfo.UseSystemPasswordChar = false;
+            // 
+            // labelEdit9
+            // 
+            labelEdit9.AutoSize = true;
+            labelEdit9.BackColor = Color.Transparent;
+            labelEdit9.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelEdit9.ForeColor = Color.FromArgb(116, 125, 132);
+            labelEdit9.Location = new Point(5, 130);
+            labelEdit9.Name = "labelEdit9";
+            labelEdit9.Size = new Size(161, 24);
+            labelEdit9.TabIndex = 5;
+            labelEdit9.Text = "Tournament Date:";
+            // 
+            // txtNameInfo
+            // 
+            txtNameInfo.BackColor = Color.Transparent;
+            txtNameInfo.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtNameInfo.ForeColor = Color.FromArgb(176, 183, 191);
+            txtNameInfo.Image = null;
+            txtNameInfo.Location = new Point(5, 80);
+            txtNameInfo.MaxLength = 32767;
+            txtNameInfo.Multiline = false;
+            txtNameInfo.Name = "txtNameInfo";
+            txtNameInfo.ReadOnly = false;
+            txtNameInfo.Size = new Size(420, 43);
+            txtNameInfo.TabIndex = 4;
+            txtNameInfo.TextAlignment = HorizontalAlignment.Left;
+            txtNameInfo.UseSystemPasswordChar = false;
+            // 
+            // labelEdit5
+            // 
+            labelEdit5.AutoSize = true;
+            labelEdit5.BackColor = Color.Transparent;
+            labelEdit5.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelEdit5.ForeColor = Color.FromArgb(116, 125, 132);
+            labelEdit5.Location = new Point(5, 50);
+            labelEdit5.Name = "labelEdit5";
+            labelEdit5.Size = new Size(174, 24);
+            labelEdit5.TabIndex = 3;
+            labelEdit5.Text = "Tournament Name:";
+            // 
+            // Infomation
+            // 
+            Infomation.AutoSize = true;
+            Infomation.BackColor = Color.Transparent;
+            Infomation.Font = new Font("Segoe UI", 25F);
+            Infomation.ForeColor = Color.White;
+            Infomation.Location = new Point(0, 0);
+            Infomation.Name = "Infomation";
+            Infomation.Size = new Size(191, 46);
+            Infomation.TabIndex = 0;
+            Infomation.Text = "Infomation:";
             // 
             // playerPage
             // 
@@ -596,6 +823,8 @@
             createPage.ResumeLayout(false);
             createPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numTournamentSize).EndInit();
+            infoPage.ResumeLayout(false);
+            infoPage.PerformLayout();
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
             ResumeLayout(false);
@@ -625,7 +854,6 @@
         private ReaLTaiizor.Controls.Button btnShowPassword;
         private ReaLTaiizor.Controls.BigLabel bigLabel3;
         private RadioButton rbtnRemoteFile;
-        private ReaLTaiizor.Controls.LabelEdit labelEdit5;
         private RadioButton rbtnLocalFile;
         private ReaLTaiizor.Controls.TextBoxEdit txtPassword;
         private ReaLTaiizor.Controls.TextBoxEdit txtUsername;
@@ -641,5 +869,19 @@
         private ReaLTaiizor.Controls.Button btnCreate;
         private ReaLTaiizor.Controls.CrownNumeric numTournamentSize;
         private ReaLTaiizor.Controls.Button btnConnectDatabase;
+        private ReaLTaiizor.Controls.BigLabel Infomation;
+        private ReaLTaiizor.Controls.TextBoxEdit txtSizeInfo;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit11;
+        private ReaLTaiizor.Controls.TextBoxEdit txtTypeInfo;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit10;
+        private ReaLTaiizor.Controls.TextBoxEdit txtDateInfo;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit9;
+        private ReaLTaiizor.Controls.TextBoxEdit txtNameInfo;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit5;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit12;
+        private CheckBox checkIsLockedInfo;
+        private CheckBox checkIsTeamsInfo;
+        private ReaLTaiizor.Controls.Button btnUpdateInfo;
+        private ReaLTaiizor.Controls.Button btnPopulateInfo;
     }
 }

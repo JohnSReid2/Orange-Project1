@@ -177,30 +177,28 @@ namespace Tangerine_Tournament
             }
         }
 
-        public SingleElimination GetTournamentInfo(string connectionString)
+        public SingleElimination GetTournamentInfoSingleElim(MySqlConnection connection)
         {
             SingleElimination tournamentInfo = null;
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+
+            string query = $"SELECT * FROM TournamentInfo";
+            using (MySqlCommand command = new MySqlCommand(query, connection))
             {
-                connection.Open();
-                string query = $"SELECT * FROM TournamentInfo";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
+                using (MySqlDataReader reader = command.ExecuteReader())
                 {
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    if (reader.Read())
                     {
-                        if (reader.Read())
-                        {
-                            string name = reader.GetString(0);
-                            string date = reader.GetString(1);
-                            string type = reader.GetString(2);
-                            bool matchLocked = reader.GetBoolean(3);
-                            bool isTeams = reader.GetBoolean(3);
-                            int size = reader.GetInt32(4);
-                            tournamentInfo = new SingleElimination(name, date, type, matchLocked, isTeams, size);
-                        }
+                        string name = reader.GetString(0);
+                        string date = reader.GetString(1);
+                        string type = reader.GetString(2);
+                        bool matchLocked = reader.GetBoolean(3);
+                        bool isTeams = reader.GetBoolean(3);
+                        int size = reader.GetInt32(4);
+                        tournamentInfo = new SingleElimination(name, date, type, matchLocked, isTeams, size);
                     }
                 }
             }
+
             return tournamentInfo;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -109,7 +110,7 @@ namespace Tangerine_Tournament
 
         private void btnConnectDatabase_Click(object sender, EventArgs e)
         {
-            if (!CheckConnection()){return;}
+            if (!CheckConnection()) { return; }
 
             try
             {
@@ -126,7 +127,7 @@ namespace Tangerine_Tournament
             }
         }
 
-        
+
 
         // =========== CREATE TAB ==========
         private void btnCreate_Click(object sender, EventArgs e)
@@ -149,7 +150,36 @@ namespace Tangerine_Tournament
         }
 
 
+        // ==================== INFO TAB ====================
 
+        private void btnUpdateInfo_Click(object sender, EventArgs e)
+        {
+            Tournament tournamentInfo = null;
+            if (!CheckConnection()) { return; }
+
+            string typeQuery = $"SELECT Type FROM TournamentInfo;";
+            string type = string.Empty;
+
+            using (MySqlCommand command = new MySqlCommand(typeQuery, connection))
+            {
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        type = reader.GetString(0);
+                    }
+                }
+            }
+            
+
+            if (type == "Single Elimination")
+            {
+                tournamentInfo = getter.GetTournamentInfoSingleElim(connection);
+            }
+
+            txtNameInfo.Text = tournamentInfo.Name;
+
+        }
 
 
 
@@ -198,5 +228,7 @@ namespace Tangerine_Tournament
         {
             return $"Data Source={url};User Id={username};Password={password};";
         }
+
+        
     }
 }

@@ -14,40 +14,28 @@ using Tangerine_Tournament.Objects;
 
 namespace Tangerine_Tournament
 {
-    public class SingleElimination
+    public class SingleElimination : Tournament
     {
-        public string Name { get; set; }
-        public string Date { get; set; }
-        public string Type { get; set; }
-        public bool MatchLocked { get; set; }
-        public bool IsTeams { get; set; }
-        public int Size {  get; set; }
-        public Team[] Teams { get; set; }
-        public Player[] Players { get; set; }
+        public SingleElimination(string name, string date, string type, bool matchLocked, bool isTeams, int size) : base(name, date, type, matchLocked, isTeams, size)
+        {
+            this.Name = name;
+            this.Date = date;
+            this.Type = type;
+            this.MatchLocked = matchLocked;
+            this.IsTeams = isTeams;
+            this.Size = size;
+
+        }
 
         public int Stages { get; set; }
 
         public int Stage { get; set; }
 
-        private string connectionString;
-
-        public SingleElimination(string name, string date, string type,bool matchLocked, bool isTeams, int size)
+     
+        public void GenerateMatches(MySqlConnection connection)
         {
-            Name = name;
-            Date = date;
-            Type = type;
-            IsTeams = isTeams;
-            Size = size;
-            Stages = (int)Math.Log2(8);
-            connectionString = $"Data Source={Name}.db";
-        }
-
-
-        public void GenerateMatches()
-        {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (connection)
             {
-                connection.Open();
                 string query = "SELECT MAX(Stage) FROM Matches";
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -266,6 +254,21 @@ namespace Tangerine_Tournament
                     }
                 }
             }
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string? ToString()
+        {
+            return base.ToString();
         }
     }
 }
