@@ -16,7 +16,7 @@ namespace Tangerine_Tournament
 {
     public class SingleElimination : Tournament
     {
-        public SingleElimination(string name, string date, string type, bool matchLocked, bool isTeams, int size) : base(name, date, type, matchLocked, isTeams, size)
+        public SingleElimination(string name, DateTime date, string type, bool matchLocked, bool isTeams, int size) : base(name, date, type, matchLocked, isTeams, size)
         {
             this.Name = name;
             this.Date = date;
@@ -32,7 +32,8 @@ namespace Tangerine_Tournament
         public int Stage { get; set; }
 
      
-        public void GenerateMatches(MySqlConnection connection)
+
+        public override void GenerateMatches(MySqlConnection connection)
         {
             using (connection)
             {
@@ -51,7 +52,7 @@ namespace Tangerine_Tournament
 
             if (Stage != 0)
             {
-                GenerateNextRound();
+                GenerateNextRound(connection);
                 return;
             }
 
@@ -59,7 +60,7 @@ namespace Tangerine_Tournament
             
             if (IsTeams)
             {
-                List<Team> teams = getter.GetTeams(connectionString);
+                List<Team> teams = getter.GetTeams(connection);
                 if (teams.Count != Size)
                 {
                     MessageBox.Show("Unable to generate matches. Amount of teams not equal to the tournament size.");
@@ -82,23 +83,19 @@ namespace Tangerine_Tournament
                         }
                         foreach (TeamMatch match in matches)
                         {
-                            using (MySqlConnection connection = new MySqlConnection(connectionString))
+                            string editTableQuery = $"INSERT INTO Matches (Contestant1ID, Contestant2ID, Stage) VALUES ({match.Team1.TeamID}, {match.Team2.TeamID}, 1)";
+                            using (MySqlCommand command = new MySqlCommand(editTableQuery, connection))
                             {
-                                connection.Open();
-                                string editTableQuery = $"INSERT INTO Matches (Contestant1ID, Contestant2ID, Stage) VALUES ({match.Team1.TeamID}, {match.Team2.TeamID}, 1)";
-                                using (MySqlCommand command = new MySqlCommand(editTableQuery, connection))
-                                {
-                                    command.ExecuteNonQuery();
-                                }
-                                connection.Close();
+                                command.ExecuteNonQuery();
                             }
+                            connection.Close();
                         }
                     }
                 }
             }
             else
             {
-                List<Player> players = getter.GetPlayers(connectionString);
+                List<Player> players = getter.GetPlayers(connection);
                 if (players.Count != Size)
                 {
                     MessageBox.Show("Unable to generate matches. Amount of players not equal to the tournament size.");
@@ -121,15 +118,10 @@ namespace Tangerine_Tournament
                         }
                         foreach (PlayerMatch match in matches)
                         {
-                            using (MySqlConnection connection = new MySqlConnection(connectionString))
+                            string editTableQuery = $"INSERT INTO Matches (Contestant1ID, Contestant2ID, stage) VALUES ({match.Player1.Id}, {match.Player2.Id}, 1)";
+                            using (MySqlCommand command = new MySqlCommand(editTableQuery, connection))
                             {
-                                connection.Open();
-                                string editTableQuery = $"INSERT INTO Matches (Contestant1ID, Contestant2ID, stage) VALUES ({match.Player1.Id}, {match.Player2.Id}, 1)";
-                                using (MySqlCommand command = new MySqlCommand(editTableQuery, connection))
-                                {
-                                    command.ExecuteNonQuery();
-                                }
-                                connection.Close();
+                                command.ExecuteNonQuery();
                             }
                         }
                     }
@@ -137,22 +129,18 @@ namespace Tangerine_Tournament
             }
             
         }
-        public void GenerateNextRound()
+        public void GenerateNextRound(MySqlConnection connection)
         {
             TournamentGetter getter = new TournamentGetter();
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            string query = "SELECT MAX(Stage) FROM Matches";
+            using (MySqlCommand command = new MySqlCommand(query, connection))
             {
-                connection.Open();
-                string query = "SELECT MAX(Stage) FROM Matches";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
+                using (MySqlDataReader reader = command.ExecuteReader())
                 {
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    while (reader.Read())
                     {
-                        while (reader.Read())
-                        {
-                            Stage = reader.GetInt32(0) + 1;
-                        }
+                        Stage = reader.GetInt32(0) + 1;
                     }
                 }
             }
@@ -161,18 +149,14 @@ namespace Tangerine_Tournament
             {
                 List<Team> teams = new List<Team>();
 
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                query = $"SELECT Winner FROM Matches WHERE Stage = {Stage - 1}";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    connection.Open();
-                    string query = $"SELECT Winner FROM Matches WHERE Stage = {Stage - 1}";
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        using (MySqlDataReader reader = command.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            {
-                                teams.Add(getter.GetTeam(reader.GetInt32(0), connectionString));
-                            }
+                            teams.Add(getter.GetTeam(reader.GetInt32(0), connection));
                         }
                     }
                 }
@@ -192,15 +176,10 @@ namespace Tangerine_Tournament
                     }
                     foreach (TeamMatch match in matches)
                     {
-                        using (MySqlConnection connection = new MySqlConnection(connectionString))
+                        string editTableQuery = $"INSERT INTO Matches (Contestant1ID, Contestant2ID, Stage) VALUES ({match.Team1.TeamID}, {match.Team2.TeamID}, 1)";
+                        using (MySqlCommand command = new MySqlCommand(editTableQuery, connection))
                         {
-                            connection.Open();
-                            string editTableQuery = $"INSERT INTO Matches (Contestant1ID, Contestant2ID, Stage) VALUES ({match.Team1.TeamID}, {match.Team2.TeamID}, 1)";
-                            using (MySqlCommand command = new MySqlCommand(editTableQuery, connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-                            connection.Close();
+                            command.ExecuteNonQuery();
                         }
                     }
                 }
@@ -208,19 +187,14 @@ namespace Tangerine_Tournament
             else
             {
                 List<Player> players = new List<Player>();
-
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                query = $"SELECT Winner FROM Matches WHERE Stage = {Stage - 1}";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    connection.Open();
-                    string query = $"SELECT Winner FROM Matches WHERE Stage = {Stage - 1}";
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    using (var reader = command.ExecuteReader())
                     {
-                        using (var reader = command.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            {
-                                players.Add(getter.GetPlayer(reader.GetInt32(0), connectionString));
-                            }
+                            players.Add(getter.GetPlayer(reader.GetInt32(0), connection));
                         }
                     }
                 }
@@ -241,15 +215,10 @@ namespace Tangerine_Tournament
                     }
                     foreach (PlayerMatch match in matches)
                     {
-                        using (MySqlConnection connection = new MySqlConnection(connectionString))
+                        string editTableQuery = $"INSERT INTO Matches (Contestant1ID, Contestant2ID, stage) VALUES ({match.Player1.Id}, {match.Player2.Id}, 1)";
+                        using (MySqlCommand command = new MySqlCommand(editTableQuery, connection))
                         {
-                            connection.Open();
-                            string editTableQuery = $"INSERT INTO Matches (Contestant1ID, Contestant2ID, stage) VALUES ({match.Player1.Id}, {match.Player2.Id}, 1)";
-                            using (MySqlCommand command = new MySqlCommand(editTableQuery, connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-                            connection.Close();
+                            command.ExecuteNonQuery();
                         }
                     }
                 }

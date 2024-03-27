@@ -1,4 +1,5 @@
-﻿using Org.BouncyCastle.Utilities.IO;
+﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Utilities.IO;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,7 +15,7 @@ namespace Tangerine_Tournament
     public class Tournament
     {
         public string Name { get; set; }
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
         public string Type { get; set; }
         public bool MatchLocked { get; set; }
         public bool IsTeams { get; set; }
@@ -22,13 +23,18 @@ namespace Tangerine_Tournament
         public Team[] Teams { get; set; }
         public Player[] Players { get; set; }
 
-        public Tournament(string name, string date, string type, bool matchLocked, bool isTeams, int size)
+        public Tournament(string name, DateTime date, string type, bool matchLocked, bool isTeams, int size)
         {
             Name = name;
             Date = date;
             Type = type;
             IsTeams = isTeams;
             Size = size;
+        }
+
+        public virtual void GenerateMatches(MySqlConnection connection)
+        {
+            return;
         }
     }
 }

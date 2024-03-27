@@ -5,6 +5,7 @@ namespace Tangerine_Tournament
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
             MainForm main = new MainForm();

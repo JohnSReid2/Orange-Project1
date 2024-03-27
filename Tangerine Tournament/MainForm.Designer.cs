@@ -44,6 +44,7 @@
             labelEdit1 = new ReaLTaiizor.Controls.LabelEdit();
             txtConnectTournament = new ReaLTaiizor.Controls.TextBoxEdit();
             createPage = new TabPage();
+            checkIsTeams = new CheckBox();
             numTournamentSize = new ReaLTaiizor.Controls.CrownNumeric();
             btnCreate = new ReaLTaiizor.Controls.Button();
             labelEdit8 = new ReaLTaiizor.Controls.LabelEdit();
@@ -54,22 +55,71 @@
             txtTournamentName = new ReaLTaiizor.Controls.TextBoxEdit();
             labelEdit6 = new ReaLTaiizor.Controls.LabelEdit();
             infoPage = new TabPage();
+            numSizeInfo = new ReaLTaiizor.Controls.CrownNumeric();
+            datetimeInfo = new ReaLTaiizor.Controls.PoisonDateTime();
             btnUpdateInfo = new ReaLTaiizor.Controls.Button();
             btnPopulateInfo = new ReaLTaiizor.Controls.Button();
             labelEdit12 = new ReaLTaiizor.Controls.LabelEdit();
             checkIsLockedInfo = new CheckBox();
             checkIsTeamsInfo = new CheckBox();
-            txtSizeInfo = new ReaLTaiizor.Controls.TextBoxEdit();
             labelEdit11 = new ReaLTaiizor.Controls.LabelEdit();
             txtTypeInfo = new ReaLTaiizor.Controls.TextBoxEdit();
             labelEdit10 = new ReaLTaiizor.Controls.LabelEdit();
-            txtDateInfo = new ReaLTaiizor.Controls.TextBoxEdit();
             labelEdit9 = new ReaLTaiizor.Controls.LabelEdit();
             txtNameInfo = new ReaLTaiizor.Controls.TextBoxEdit();
             labelEdit5 = new ReaLTaiizor.Controls.LabelEdit();
             Infomation = new ReaLTaiizor.Controls.BigLabel();
             playerPage = new TabPage();
+            btnDeletePlayer = new ReaLTaiizor.Controls.Button();
+            btnUpdatePlayer = new ReaLTaiizor.Controls.Button();
+            dataGridPlayer = new DataGridView();
+            ID1 = new DataGridViewTextBoxColumn();
+            FirstName1 = new DataGridViewTextBoxColumn();
+            LastName1 = new DataGridViewTextBoxColumn();
+            Gamertag1 = new DataGridViewTextBoxColumn();
+            Email1 = new DataGridViewTextBoxColumn();
+            Timezone1 = new DataGridViewTextBoxColumn();
+            btnAddPlayer = new ReaLTaiizor.Controls.Button();
+            numPlayerTimezone = new ReaLTaiizor.Controls.CrownNumeric();
+            labelEdit16 = new ReaLTaiizor.Controls.LabelEdit();
+            txtPlayerEmail = new ReaLTaiizor.Controls.TextBoxEdit();
+            labelEdit17 = new ReaLTaiizor.Controls.LabelEdit();
+            txtPlayerTag = new ReaLTaiizor.Controls.TextBoxEdit();
+            labelEdit18 = new ReaLTaiizor.Controls.LabelEdit();
+            txtPlayerLName = new ReaLTaiizor.Controls.TextBoxEdit();
+            labelEdit13 = new ReaLTaiizor.Controls.LabelEdit();
+            txtPlayerFName = new ReaLTaiizor.Controls.TextBoxEdit();
+            labelEdit14 = new ReaLTaiizor.Controls.LabelEdit();
+            txtPlayerID = new ReaLTaiizor.Controls.TextBoxEdit();
+            labelEdit15 = new ReaLTaiizor.Controls.LabelEdit();
+            btnLoadPlayers = new ReaLTaiizor.Controls.Button();
             teamPage = new TabPage();
+            btnRemoveTeamPlayer = new ReaLTaiizor.Controls.Button();
+            btnAssignPlayer = new ReaLTaiizor.Controls.Button();
+            btnDeleteTeam = new ReaLTaiizor.Controls.Button();
+            btnUpdateTeam = new ReaLTaiizor.Controls.Button();
+            btnAddTeam = new ReaLTaiizor.Controls.Button();
+            txtTeamName = new ReaLTaiizor.Controls.TextBoxEdit();
+            labelEdit21 = new ReaLTaiizor.Controls.LabelEdit();
+            txtTeamPlayerID = new ReaLTaiizor.Controls.TextBoxEdit();
+            labelEdit22 = new ReaLTaiizor.Controls.LabelEdit();
+            txtCaptainID = new ReaLTaiizor.Controls.TextBoxEdit();
+            labelEdit23 = new ReaLTaiizor.Controls.LabelEdit();
+            txtTeamID = new ReaLTaiizor.Controls.TextBoxEdit();
+            labelEdit24 = new ReaLTaiizor.Controls.LabelEdit();
+            btnLoadTeams = new ReaLTaiizor.Controls.Button();
+            dataGridTeamPlayers = new DataGridView();
+            dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn9 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn10 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn11 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn12 = new DataGridViewTextBoxColumn();
+            dataGridTeams = new DataGridView();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            TeamName = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
+            CaptainID = new DataGridViewTextBoxColumn();
             matchPage = new TabPage();
             panelHeader = new ReaLTaiizor.Controls.Panel();
             bigLabel3 = new ReaLTaiizor.Controls.BigLabel();
@@ -80,6 +130,13 @@
             createPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numTournamentSize).BeginInit();
             infoPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numSizeInfo).BeginInit();
+            playerPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridPlayer).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numPlayerTimezone).BeginInit();
+            teamPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridTeamPlayers).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridTeams).BeginInit();
             panelHeader.SuspendLayout();
             SuspendLayout();
             // 
@@ -119,6 +176,7 @@
             tabPage1.StringType = StringAlignment.Near;
             tabPage1.TabColor = Color.FromArgb(54, 57, 64);
             tabPage1.TabIndex = 0;
+            tabPage1.TabStop = false;
             tabPage1.TextRenderingType = System.Drawing.Text.TextRenderingHint.SystemDefault;
             tabPage1.SelectedIndexChanged += tabPage1_SelectedIndexChanged;
             // 
@@ -161,7 +219,8 @@
             btnConnectDatabase.PressedBorderColor = Color.FromArgb(165, 37, 37);
             btnConnectDatabase.PressedColor = Color.FromArgb(165, 37, 37);
             btnConnectDatabase.Size = new Size(120, 43);
-            btnConnectDatabase.TabIndex = 18;
+            btnConnectDatabase.TabIndex = 6;
+            btnConnectDatabase.TabStop = false;
             btnConnectDatabase.Text = "Connect";
             btnConnectDatabase.TextAlignment = StringAlignment.Center;
             btnConnectDatabase.Click += btnConnectDatabase_Click;
@@ -178,7 +237,7 @@
             txtPassword.Name = "txtPassword";
             txtPassword.ReadOnly = false;
             txtPassword.Size = new Size(420, 43);
-            txtPassword.TabIndex = 17;
+            txtPassword.TabIndex = 3;
             txtPassword.TextAlignment = HorizontalAlignment.Left;
             txtPassword.UseSystemPasswordChar = false;
             // 
@@ -199,7 +258,8 @@
             btnShowPassword.PressedBorderColor = Color.Transparent;
             btnShowPassword.PressedColor = Color.Transparent;
             btnShowPassword.Size = new Size(43, 43);
-            btnShowPassword.TabIndex = 2;
+            btnShowPassword.TabIndex = 0;
+            btnShowPassword.TabStop = false;
             btnShowPassword.Text = "";
             btnShowPassword.TextAlignment = StringAlignment.Center;
             btnShowPassword.MouseDown += btnShowPassword_MouseDown;
@@ -220,7 +280,8 @@
             btnConnect.PressedBorderColor = Color.FromArgb(165, 37, 37);
             btnConnect.PressedColor = Color.FromArgb(165, 37, 37);
             btnConnect.Size = new Size(120, 43);
-            btnConnect.TabIndex = 12;
+            btnConnect.TabIndex = 4;
+            btnConnect.TabStop = false;
             btnConnect.Text = "Connect";
             btnConnect.TextAlignment = StringAlignment.Center;
             btnConnect.Click += btnConnect_Click;
@@ -249,7 +310,7 @@
             txtUsername.Name = "txtUsername";
             txtUsername.ReadOnly = false;
             txtUsername.Size = new Size(420, 43);
-            txtUsername.TabIndex = 9;
+            txtUsername.TabIndex = 2;
             txtUsername.TextAlignment = HorizontalAlignment.Left;
             txtUsername.UseSystemPasswordChar = false;
             // 
@@ -277,7 +338,7 @@
             txtURL.Name = "txtURL";
             txtURL.ReadOnly = false;
             txtURL.Size = new Size(420, 43);
-            txtURL.TabIndex = 7;
+            txtURL.TabIndex = 1;
             txtURL.TextAlignment = HorizontalAlignment.Left;
             txtURL.UseSystemPasswordChar = false;
             // 
@@ -345,13 +406,14 @@
             txtConnectTournament.Name = "txtConnectTournament";
             txtConnectTournament.ReadOnly = false;
             txtConnectTournament.Size = new Size(420, 43);
-            txtConnectTournament.TabIndex = 0;
+            txtConnectTournament.TabIndex = 5;
             txtConnectTournament.TextAlignment = HorizontalAlignment.Left;
             txtConnectTournament.UseSystemPasswordChar = false;
             // 
             // createPage
             // 
             createPage.BackColor = Color.Transparent;
+            createPage.Controls.Add(checkIsTeams);
             createPage.Controls.Add(numTournamentSize);
             createPage.Controls.Add(btnCreate);
             createPage.Controls.Add(labelEdit8);
@@ -366,6 +428,17 @@
             createPage.Size = new Size(672, 452);
             createPage.TabIndex = 5;
             createPage.Text = "Create";
+            // 
+            // checkIsTeams
+            // 
+            checkIsTeams.AutoSize = true;
+            checkIsTeams.ForeColor = Color.FromArgb(116, 125, 132);
+            checkIsTeams.Location = new Point(5, 265);
+            checkIsTeams.Name = "checkIsTeams";
+            checkIsTeams.Size = new Size(79, 25);
+            checkIsTeams.TabIndex = 18;
+            checkIsTeams.Text = "Teams?";
+            checkIsTeams.UseVisualStyleBackColor = true;
             // 
             // numTournamentSize
             // 
@@ -385,7 +458,7 @@
             btnCreate.Image = null;
             btnCreate.ImageAlign = ContentAlignment.MiddleLeft;
             btnCreate.InactiveColor = Color.FromArgb(32, 34, 37);
-            btnCreate.Location = new Point(544, 216);
+            btnCreate.Location = new Point(544, 247);
             btnCreate.Name = "btnCreate";
             btnCreate.PressedBorderColor = Color.FromArgb(165, 37, 37);
             btnCreate.PressedColor = Color.FromArgb(165, 37, 37);
@@ -483,16 +556,16 @@
             // infoPage
             // 
             infoPage.BackColor = Color.Transparent;
+            infoPage.Controls.Add(numSizeInfo);
+            infoPage.Controls.Add(datetimeInfo);
             infoPage.Controls.Add(btnUpdateInfo);
             infoPage.Controls.Add(btnPopulateInfo);
             infoPage.Controls.Add(labelEdit12);
             infoPage.Controls.Add(checkIsLockedInfo);
             infoPage.Controls.Add(checkIsTeamsInfo);
-            infoPage.Controls.Add(txtSizeInfo);
             infoPage.Controls.Add(labelEdit11);
             infoPage.Controls.Add(txtTypeInfo);
             infoPage.Controls.Add(labelEdit10);
-            infoPage.Controls.Add(txtDateInfo);
             infoPage.Controls.Add(labelEdit9);
             infoPage.Controls.Add(txtNameInfo);
             infoPage.Controls.Add(labelEdit5);
@@ -504,6 +577,22 @@
             infoPage.Size = new Size(672, 452);
             infoPage.TabIndex = 1;
             infoPage.Text = "Info";
+            // 
+            // numSizeInfo
+            // 
+            numSizeInfo.Location = new Point(5, 320);
+            numSizeInfo.Maximum = new decimal(new int[] { 512, 0, 0, 0 });
+            numSizeInfo.Name = "numSizeInfo";
+            numSizeInfo.Size = new Size(120, 29);
+            numSizeInfo.TabIndex = 18;
+            // 
+            // datetimeInfo
+            // 
+            datetimeInfo.Location = new Point(5, 165);
+            datetimeInfo.MinimumSize = new Size(0, 29);
+            datetimeInfo.Name = "datetimeInfo";
+            datetimeInfo.Size = new Size(200, 29);
+            datetimeInfo.TabIndex = 14;
             // 
             // btnUpdateInfo
             // 
@@ -520,7 +609,7 @@
             btnUpdateInfo.PressedBorderColor = Color.FromArgb(165, 37, 37);
             btnUpdateInfo.PressedColor = Color.FromArgb(165, 37, 37);
             btnUpdateInfo.Size = new Size(120, 43);
-            btnUpdateInfo.TabIndex = 15;
+            btnUpdateInfo.TabIndex = 7;
             btnUpdateInfo.Text = "Update Info";
             btnUpdateInfo.TextAlignment = StringAlignment.Center;
             btnUpdateInfo.Click += btnUpdateInfo_Click;
@@ -540,9 +629,10 @@
             btnPopulateInfo.PressedBorderColor = Color.FromArgb(165, 37, 37);
             btnPopulateInfo.PressedColor = Color.FromArgb(165, 37, 37);
             btnPopulateInfo.Size = new Size(120, 43);
-            btnPopulateInfo.TabIndex = 14;
+            btnPopulateInfo.TabIndex = 8;
             btnPopulateInfo.Text = "Load Info";
             btnPopulateInfo.TextAlignment = StringAlignment.Center;
+            btnPopulateInfo.Click += btnPopulateInfo_Click;
             // 
             // labelEdit12
             // 
@@ -563,7 +653,7 @@
             checkIsLockedInfo.Location = new Point(5, 400);
             checkIsLockedInfo.Name = "checkIsLockedInfo";
             checkIsLockedInfo.Size = new Size(85, 25);
-            checkIsLockedInfo.TabIndex = 12;
+            checkIsLockedInfo.TabIndex = 5;
             checkIsLockedInfo.Text = "Locked?";
             checkIsLockedInfo.UseVisualStyleBackColor = true;
             // 
@@ -574,25 +664,9 @@
             checkIsTeamsInfo.Location = new Point(113, 400);
             checkIsTeamsInfo.Name = "checkIsTeamsInfo";
             checkIsTeamsInfo.Size = new Size(79, 25);
-            checkIsTeamsInfo.TabIndex = 11;
+            checkIsTeamsInfo.TabIndex = 6;
             checkIsTeamsInfo.Text = "Teams?";
             checkIsTeamsInfo.UseVisualStyleBackColor = true;
-            // 
-            // txtSizeInfo
-            // 
-            txtSizeInfo.BackColor = Color.Transparent;
-            txtSizeInfo.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtSizeInfo.ForeColor = Color.FromArgb(176, 183, 191);
-            txtSizeInfo.Image = null;
-            txtSizeInfo.Location = new Point(5, 317);
-            txtSizeInfo.MaxLength = 32767;
-            txtSizeInfo.Multiline = false;
-            txtSizeInfo.Name = "txtSizeInfo";
-            txtSizeInfo.ReadOnly = false;
-            txtSizeInfo.Size = new Size(420, 43);
-            txtSizeInfo.TabIndex = 10;
-            txtSizeInfo.TextAlignment = HorizontalAlignment.Left;
-            txtSizeInfo.UseSystemPasswordChar = false;
             // 
             // labelEdit11
             // 
@@ -619,7 +693,7 @@
             txtTypeInfo.Name = "txtTypeInfo";
             txtTypeInfo.ReadOnly = true;
             txtTypeInfo.Size = new Size(420, 43);
-            txtTypeInfo.TabIndex = 8;
+            txtTypeInfo.TabIndex = 3;
             txtTypeInfo.TextAlignment = HorizontalAlignment.Left;
             txtTypeInfo.UseSystemPasswordChar = false;
             // 
@@ -634,22 +708,6 @@
             labelEdit10.Size = new Size(166, 24);
             labelEdit10.TabIndex = 7;
             labelEdit10.Text = "Tournament Type:";
-            // 
-            // txtDateInfo
-            // 
-            txtDateInfo.BackColor = Color.Transparent;
-            txtDateInfo.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtDateInfo.ForeColor = Color.FromArgb(176, 183, 191);
-            txtDateInfo.Image = null;
-            txtDateInfo.Location = new Point(5, 160);
-            txtDateInfo.MaxLength = 32767;
-            txtDateInfo.Multiline = false;
-            txtDateInfo.Name = "txtDateInfo";
-            txtDateInfo.ReadOnly = false;
-            txtDateInfo.Size = new Size(420, 43);
-            txtDateInfo.TabIndex = 6;
-            txtDateInfo.TextAlignment = HorizontalAlignment.Left;
-            txtDateInfo.UseSystemPasswordChar = false;
             // 
             // labelEdit9
             // 
@@ -675,7 +733,7 @@
             txtNameInfo.Name = "txtNameInfo";
             txtNameInfo.ReadOnly = false;
             txtNameInfo.Size = new Size(420, 43);
-            txtNameInfo.TabIndex = 4;
+            txtNameInfo.TabIndex = 1;
             txtNameInfo.TextAlignment = HorizontalAlignment.Left;
             txtNameInfo.UseSystemPasswordChar = false;
             // 
@@ -706,20 +764,655 @@
             // playerPage
             // 
             playerPage.BackColor = Color.Transparent;
+            playerPage.Controls.Add(btnDeletePlayer);
+            playerPage.Controls.Add(btnUpdatePlayer);
+            playerPage.Controls.Add(dataGridPlayer);
+            playerPage.Controls.Add(btnAddPlayer);
+            playerPage.Controls.Add(numPlayerTimezone);
+            playerPage.Controls.Add(labelEdit16);
+            playerPage.Controls.Add(txtPlayerEmail);
+            playerPage.Controls.Add(labelEdit17);
+            playerPage.Controls.Add(txtPlayerTag);
+            playerPage.Controls.Add(labelEdit18);
+            playerPage.Controls.Add(txtPlayerLName);
+            playerPage.Controls.Add(labelEdit13);
+            playerPage.Controls.Add(txtPlayerFName);
+            playerPage.Controls.Add(labelEdit14);
+            playerPage.Controls.Add(txtPlayerID);
+            playerPage.Controls.Add(labelEdit15);
+            playerPage.Controls.Add(btnLoadPlayers);
             playerPage.Location = new Point(124, 4);
             playerPage.Name = "playerPage";
             playerPage.Size = new Size(672, 452);
             playerPage.TabIndex = 2;
             playerPage.Text = "Players";
             // 
+            // btnDeletePlayer
+            // 
+            btnDeletePlayer.BackColor = Color.Transparent;
+            btnDeletePlayer.BorderColor = Color.FromArgb(32, 34, 37);
+            btnDeletePlayer.EnteredBorderColor = Color.FromArgb(165, 37, 37);
+            btnDeletePlayer.EnteredColor = Color.FromArgb(32, 34, 37);
+            btnDeletePlayer.Font = new Font("Microsoft Sans Serif", 12F);
+            btnDeletePlayer.Image = null;
+            btnDeletePlayer.ImageAlign = ContentAlignment.MiddleLeft;
+            btnDeletePlayer.InactiveColor = Color.FromArgb(32, 34, 37);
+            btnDeletePlayer.Location = new Point(544, 300);
+            btnDeletePlayer.Name = "btnDeletePlayer";
+            btnDeletePlayer.PressedBorderColor = Color.FromArgb(165, 37, 37);
+            btnDeletePlayer.PressedColor = Color.FromArgb(165, 37, 37);
+            btnDeletePlayer.Size = new Size(120, 43);
+            btnDeletePlayer.TabIndex = 28;
+            btnDeletePlayer.Text = "Delete Player";
+            btnDeletePlayer.TextAlignment = StringAlignment.Center;
+            btnDeletePlayer.Click += btnDeletePlayer_Click;
+            // 
+            // btnUpdatePlayer
+            // 
+            btnUpdatePlayer.BackColor = Color.Transparent;
+            btnUpdatePlayer.BorderColor = Color.FromArgb(32, 34, 37);
+            btnUpdatePlayer.EnteredBorderColor = Color.FromArgb(165, 37, 37);
+            btnUpdatePlayer.EnteredColor = Color.FromArgb(32, 34, 37);
+            btnUpdatePlayer.Font = new Font("Microsoft Sans Serif", 12F);
+            btnUpdatePlayer.Image = null;
+            btnUpdatePlayer.ImageAlign = ContentAlignment.MiddleLeft;
+            btnUpdatePlayer.InactiveColor = Color.FromArgb(32, 34, 37);
+            btnUpdatePlayer.Location = new Point(418, 300);
+            btnUpdatePlayer.Name = "btnUpdatePlayer";
+            btnUpdatePlayer.PressedBorderColor = Color.FromArgb(165, 37, 37);
+            btnUpdatePlayer.PressedColor = Color.FromArgb(165, 37, 37);
+            btnUpdatePlayer.Size = new Size(120, 43);
+            btnUpdatePlayer.TabIndex = 27;
+            btnUpdatePlayer.Text = "Update Player";
+            btnUpdatePlayer.TextAlignment = StringAlignment.Center;
+            btnUpdatePlayer.Click += btnUpdatePlayer_Click;
+            // 
+            // dataGridPlayer
+            // 
+            dataGridPlayer.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridPlayer.Columns.AddRange(new DataGridViewColumn[] { ID1, FirstName1, LastName1, Gamertag1, Email1, Timezone1 });
+            dataGridPlayer.Location = new Point(5, 5);
+            dataGridPlayer.Name = "dataGridPlayer";
+            dataGridPlayer.RowHeadersWidth = 58;
+            dataGridPlayer.Size = new Size(660, 180);
+            dataGridPlayer.TabIndex = 26;
+            dataGridPlayer.CellDoubleClick += dataGridPlayer_CellDoubleClick;
+            // 
+            // ID1
+            // 
+            ID1.HeaderText = "ID";
+            ID1.Name = "ID1";
+            ID1.ReadOnly = true;
+            // 
+            // FirstName1
+            // 
+            FirstName1.HeaderText = "First Name";
+            FirstName1.Name = "FirstName1";
+            FirstName1.ReadOnly = true;
+            // 
+            // LastName1
+            // 
+            LastName1.HeaderText = "Last Name";
+            LastName1.Name = "LastName1";
+            LastName1.ReadOnly = true;
+            // 
+            // Gamertag1
+            // 
+            Gamertag1.HeaderText = "Gamertag";
+            Gamertag1.Name = "Gamertag1";
+            Gamertag1.ReadOnly = true;
+            // 
+            // Email1
+            // 
+            Email1.HeaderText = "Email";
+            Email1.Name = "Email1";
+            Email1.ReadOnly = true;
+            // 
+            // Timezone1
+            // 
+            Timezone1.HeaderText = "Timezone (UTC)";
+            Timezone1.Name = "Timezone1";
+            Timezone1.ReadOnly = true;
+            // 
+            // btnAddPlayer
+            // 
+            btnAddPlayer.BackColor = Color.Transparent;
+            btnAddPlayer.BorderColor = Color.FromArgb(32, 34, 37);
+            btnAddPlayer.EnteredBorderColor = Color.FromArgb(165, 37, 37);
+            btnAddPlayer.EnteredColor = Color.FromArgb(32, 34, 37);
+            btnAddPlayer.Font = new Font("Microsoft Sans Serif", 12F);
+            btnAddPlayer.Image = null;
+            btnAddPlayer.ImageAlign = ContentAlignment.MiddleLeft;
+            btnAddPlayer.InactiveColor = Color.FromArgb(32, 34, 37);
+            btnAddPlayer.Location = new Point(418, 220);
+            btnAddPlayer.Name = "btnAddPlayer";
+            btnAddPlayer.PressedBorderColor = Color.FromArgb(165, 37, 37);
+            btnAddPlayer.PressedColor = Color.FromArgb(165, 37, 37);
+            btnAddPlayer.Size = new Size(120, 43);
+            btnAddPlayer.TabIndex = 25;
+            btnAddPlayer.Text = "Add Player";
+            btnAddPlayer.TextAlignment = StringAlignment.Center;
+            btnAddPlayer.Click += btnAddPlayer_Click;
+            // 
+            // numPlayerTimezone
+            // 
+            numPlayerTimezone.Location = new Point(211, 387);
+            numPlayerTimezone.Maximum = new decimal(new int[] { 12, 0, 0, 0 });
+            numPlayerTimezone.Minimum = new decimal(new int[] { 12, 0, 0, int.MinValue });
+            numPlayerTimezone.Name = "numPlayerTimezone";
+            numPlayerTimezone.Size = new Size(200, 29);
+            numPlayerTimezone.TabIndex = 24;
+            // 
+            // labelEdit16
+            // 
+            labelEdit16.AutoSize = true;
+            labelEdit16.BackColor = Color.Transparent;
+            labelEdit16.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelEdit16.ForeColor = Color.FromArgb(116, 125, 132);
+            labelEdit16.Location = new Point(211, 350);
+            labelEdit16.Name = "labelEdit16";
+            labelEdit16.Size = new Size(100, 24);
+            labelEdit16.TabIndex = 23;
+            labelEdit16.Text = "Timezone:";
+            // 
+            // txtPlayerEmail
+            // 
+            txtPlayerEmail.BackColor = Color.Transparent;
+            txtPlayerEmail.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPlayerEmail.ForeColor = Color.FromArgb(176, 183, 191);
+            txtPlayerEmail.Image = null;
+            txtPlayerEmail.Location = new Point(211, 300);
+            txtPlayerEmail.MaxLength = 32767;
+            txtPlayerEmail.Multiline = false;
+            txtPlayerEmail.Name = "txtPlayerEmail";
+            txtPlayerEmail.ReadOnly = false;
+            txtPlayerEmail.Size = new Size(200, 43);
+            txtPlayerEmail.TabIndex = 19;
+            txtPlayerEmail.TextAlignment = HorizontalAlignment.Left;
+            txtPlayerEmail.UseSystemPasswordChar = false;
+            // 
+            // labelEdit17
+            // 
+            labelEdit17.AutoSize = true;
+            labelEdit17.BackColor = Color.Transparent;
+            labelEdit17.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelEdit17.ForeColor = Color.FromArgb(116, 125, 132);
+            labelEdit17.Location = new Point(211, 270);
+            labelEdit17.Name = "labelEdit17";
+            labelEdit17.Size = new Size(62, 24);
+            labelEdit17.TabIndex = 22;
+            labelEdit17.Text = "Email:";
+            // 
+            // txtPlayerTag
+            // 
+            txtPlayerTag.BackColor = Color.Transparent;
+            txtPlayerTag.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPlayerTag.ForeColor = Color.FromArgb(176, 183, 191);
+            txtPlayerTag.Image = null;
+            txtPlayerTag.Location = new Point(211, 220);
+            txtPlayerTag.MaxLength = 32767;
+            txtPlayerTag.Multiline = false;
+            txtPlayerTag.Name = "txtPlayerTag";
+            txtPlayerTag.ReadOnly = false;
+            txtPlayerTag.Size = new Size(200, 43);
+            txtPlayerTag.TabIndex = 18;
+            txtPlayerTag.TextAlignment = HorizontalAlignment.Left;
+            txtPlayerTag.UseSystemPasswordChar = false;
+            // 
+            // labelEdit18
+            // 
+            labelEdit18.AutoSize = true;
+            labelEdit18.BackColor = Color.Transparent;
+            labelEdit18.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelEdit18.ForeColor = Color.FromArgb(116, 125, 132);
+            labelEdit18.Location = new Point(211, 190);
+            labelEdit18.Name = "labelEdit18";
+            labelEdit18.Size = new Size(97, 24);
+            labelEdit18.TabIndex = 21;
+            labelEdit18.Text = "Gamertag:";
+            // 
+            // txtPlayerLName
+            // 
+            txtPlayerLName.BackColor = Color.Transparent;
+            txtPlayerLName.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPlayerLName.ForeColor = Color.FromArgb(176, 183, 191);
+            txtPlayerLName.Image = null;
+            txtPlayerLName.Location = new Point(5, 380);
+            txtPlayerLName.MaxLength = 32767;
+            txtPlayerLName.Multiline = false;
+            txtPlayerLName.Name = "txtPlayerLName";
+            txtPlayerLName.ReadOnly = false;
+            txtPlayerLName.Size = new Size(200, 43);
+            txtPlayerLName.TabIndex = 13;
+            txtPlayerLName.TextAlignment = HorizontalAlignment.Left;
+            txtPlayerLName.UseSystemPasswordChar = false;
+            // 
+            // labelEdit13
+            // 
+            labelEdit13.AutoSize = true;
+            labelEdit13.BackColor = Color.Transparent;
+            labelEdit13.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelEdit13.ForeColor = Color.FromArgb(116, 125, 132);
+            labelEdit13.Location = new Point(5, 350);
+            labelEdit13.Name = "labelEdit13";
+            labelEdit13.Size = new Size(104, 24);
+            labelEdit13.TabIndex = 17;
+            labelEdit13.Text = "Last Name:";
+            // 
+            // txtPlayerFName
+            // 
+            txtPlayerFName.BackColor = Color.Transparent;
+            txtPlayerFName.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPlayerFName.ForeColor = Color.FromArgb(176, 183, 191);
+            txtPlayerFName.Image = null;
+            txtPlayerFName.Location = new Point(5, 300);
+            txtPlayerFName.MaxLength = 32767;
+            txtPlayerFName.Multiline = false;
+            txtPlayerFName.Name = "txtPlayerFName";
+            txtPlayerFName.ReadOnly = false;
+            txtPlayerFName.Size = new Size(200, 43);
+            txtPlayerFName.TabIndex = 12;
+            txtPlayerFName.TextAlignment = HorizontalAlignment.Left;
+            txtPlayerFName.UseSystemPasswordChar = false;
+            // 
+            // labelEdit14
+            // 
+            labelEdit14.AutoSize = true;
+            labelEdit14.BackColor = Color.Transparent;
+            labelEdit14.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelEdit14.ForeColor = Color.FromArgb(116, 125, 132);
+            labelEdit14.Location = new Point(5, 270);
+            labelEdit14.Name = "labelEdit14";
+            labelEdit14.Size = new Size(106, 24);
+            labelEdit14.TabIndex = 16;
+            labelEdit14.Text = "First Name:";
+            // 
+            // txtPlayerID
+            // 
+            txtPlayerID.BackColor = Color.Transparent;
+            txtPlayerID.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPlayerID.ForeColor = Color.FromArgb(176, 183, 191);
+            txtPlayerID.Image = null;
+            txtPlayerID.Location = new Point(5, 220);
+            txtPlayerID.MaxLength = 32767;
+            txtPlayerID.Multiline = false;
+            txtPlayerID.Name = "txtPlayerID";
+            txtPlayerID.ReadOnly = false;
+            txtPlayerID.Size = new Size(200, 43);
+            txtPlayerID.TabIndex = 11;
+            txtPlayerID.TextAlignment = HorizontalAlignment.Left;
+            txtPlayerID.UseSystemPasswordChar = false;
+            // 
+            // labelEdit15
+            // 
+            labelEdit15.AutoSize = true;
+            labelEdit15.BackColor = Color.Transparent;
+            labelEdit15.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelEdit15.ForeColor = Color.FromArgb(116, 125, 132);
+            labelEdit15.Location = new Point(5, 190);
+            labelEdit15.Name = "labelEdit15";
+            labelEdit15.Size = new Size(32, 24);
+            labelEdit15.TabIndex = 15;
+            labelEdit15.Text = "ID:";
+            // 
+            // btnLoadPlayers
+            // 
+            btnLoadPlayers.BackColor = Color.Transparent;
+            btnLoadPlayers.BorderColor = Color.FromArgb(32, 34, 37);
+            btnLoadPlayers.EnteredBorderColor = Color.FromArgb(165, 37, 37);
+            btnLoadPlayers.EnteredColor = Color.FromArgb(32, 34, 37);
+            btnLoadPlayers.Font = new Font("Microsoft Sans Serif", 12F);
+            btnLoadPlayers.Image = null;
+            btnLoadPlayers.ImageAlign = ContentAlignment.MiddleLeft;
+            btnLoadPlayers.InactiveColor = Color.FromArgb(32, 34, 37);
+            btnLoadPlayers.Location = new Point(544, 220);
+            btnLoadPlayers.Name = "btnLoadPlayers";
+            btnLoadPlayers.PressedBorderColor = Color.FromArgb(165, 37, 37);
+            btnLoadPlayers.PressedColor = Color.FromArgb(165, 37, 37);
+            btnLoadPlayers.Size = new Size(120, 43);
+            btnLoadPlayers.TabIndex = 9;
+            btnLoadPlayers.Text = "Load Players";
+            btnLoadPlayers.TextAlignment = StringAlignment.Center;
+            btnLoadPlayers.Click += btnLoadPlayers_Click;
+            // 
             // teamPage
             // 
             teamPage.BackColor = Color.Transparent;
+            teamPage.Controls.Add(btnRemoveTeamPlayer);
+            teamPage.Controls.Add(btnAssignPlayer);
+            teamPage.Controls.Add(btnDeleteTeam);
+            teamPage.Controls.Add(btnUpdateTeam);
+            teamPage.Controls.Add(btnAddTeam);
+            teamPage.Controls.Add(txtTeamName);
+            teamPage.Controls.Add(labelEdit21);
+            teamPage.Controls.Add(txtTeamPlayerID);
+            teamPage.Controls.Add(labelEdit22);
+            teamPage.Controls.Add(txtCaptainID);
+            teamPage.Controls.Add(labelEdit23);
+            teamPage.Controls.Add(txtTeamID);
+            teamPage.Controls.Add(labelEdit24);
+            teamPage.Controls.Add(btnLoadTeams);
+            teamPage.Controls.Add(dataGridTeamPlayers);
+            teamPage.Controls.Add(dataGridTeams);
             teamPage.Location = new Point(124, 4);
             teamPage.Name = "teamPage";
             teamPage.Size = new Size(672, 452);
             teamPage.TabIndex = 3;
             teamPage.Text = "Teams";
+            // 
+            // btnRemoveTeamPlayer
+            // 
+            btnRemoveTeamPlayer.BackColor = Color.Transparent;
+            btnRemoveTeamPlayer.BorderColor = Color.FromArgb(32, 34, 37);
+            btnRemoveTeamPlayer.EnteredBorderColor = Color.FromArgb(165, 37, 37);
+            btnRemoveTeamPlayer.EnteredColor = Color.FromArgb(32, 34, 37);
+            btnRemoveTeamPlayer.Font = new Font("Microsoft Sans Serif", 12F);
+            btnRemoveTeamPlayer.Image = null;
+            btnRemoveTeamPlayer.ImageAlign = ContentAlignment.MiddleLeft;
+            btnRemoveTeamPlayer.InactiveColor = Color.FromArgb(32, 34, 37);
+            btnRemoveTeamPlayer.Location = new Point(544, 380);
+            btnRemoveTeamPlayer.Name = "btnRemoveTeamPlayer";
+            btnRemoveTeamPlayer.PressedBorderColor = Color.FromArgb(165, 37, 37);
+            btnRemoveTeamPlayer.PressedColor = Color.FromArgb(165, 37, 37);
+            btnRemoveTeamPlayer.Size = new Size(120, 43);
+            btnRemoveTeamPlayer.TabIndex = 46;
+            btnRemoveTeamPlayer.Text = "Remove Player";
+            btnRemoveTeamPlayer.TextAlignment = StringAlignment.Center;
+            btnRemoveTeamPlayer.Click += btnRemoveTeamPlayer_Click;
+            // 
+            // btnAssignPlayer
+            // 
+            btnAssignPlayer.BackColor = Color.Transparent;
+            btnAssignPlayer.BorderColor = Color.FromArgb(32, 34, 37);
+            btnAssignPlayer.EnteredBorderColor = Color.FromArgb(165, 37, 37);
+            btnAssignPlayer.EnteredColor = Color.FromArgb(32, 34, 37);
+            btnAssignPlayer.Font = new Font("Microsoft Sans Serif", 12F);
+            btnAssignPlayer.Image = null;
+            btnAssignPlayer.ImageAlign = ContentAlignment.MiddleLeft;
+            btnAssignPlayer.InactiveColor = Color.FromArgb(32, 34, 37);
+            btnAssignPlayer.Location = new Point(418, 380);
+            btnAssignPlayer.Name = "btnAssignPlayer";
+            btnAssignPlayer.PressedBorderColor = Color.FromArgb(165, 37, 37);
+            btnAssignPlayer.PressedColor = Color.FromArgb(165, 37, 37);
+            btnAssignPlayer.Size = new Size(120, 43);
+            btnAssignPlayer.TabIndex = 45;
+            btnAssignPlayer.Text = "Assign Player";
+            btnAssignPlayer.TextAlignment = StringAlignment.Center;
+            btnAssignPlayer.Click += btnAssignPlayer_Click;
+            // 
+            // btnDeleteTeam
+            // 
+            btnDeleteTeam.BackColor = Color.Transparent;
+            btnDeleteTeam.BorderColor = Color.FromArgb(32, 34, 37);
+            btnDeleteTeam.EnteredBorderColor = Color.FromArgb(165, 37, 37);
+            btnDeleteTeam.EnteredColor = Color.FromArgb(32, 34, 37);
+            btnDeleteTeam.Font = new Font("Microsoft Sans Serif", 12F);
+            btnDeleteTeam.Image = null;
+            btnDeleteTeam.ImageAlign = ContentAlignment.MiddleLeft;
+            btnDeleteTeam.InactiveColor = Color.FromArgb(32, 34, 37);
+            btnDeleteTeam.Location = new Point(544, 300);
+            btnDeleteTeam.Name = "btnDeleteTeam";
+            btnDeleteTeam.PressedBorderColor = Color.FromArgb(165, 37, 37);
+            btnDeleteTeam.PressedColor = Color.FromArgb(165, 37, 37);
+            btnDeleteTeam.Size = new Size(120, 43);
+            btnDeleteTeam.TabIndex = 44;
+            btnDeleteTeam.Text = "Delete Team";
+            btnDeleteTeam.TextAlignment = StringAlignment.Center;
+            btnDeleteTeam.Click += btnDeleteTeam_Click;
+            // 
+            // btnUpdateTeam
+            // 
+            btnUpdateTeam.BackColor = Color.Transparent;
+            btnUpdateTeam.BorderColor = Color.FromArgb(32, 34, 37);
+            btnUpdateTeam.EnteredBorderColor = Color.FromArgb(165, 37, 37);
+            btnUpdateTeam.EnteredColor = Color.FromArgb(32, 34, 37);
+            btnUpdateTeam.Font = new Font("Microsoft Sans Serif", 12F);
+            btnUpdateTeam.Image = null;
+            btnUpdateTeam.ImageAlign = ContentAlignment.MiddleLeft;
+            btnUpdateTeam.InactiveColor = Color.FromArgb(32, 34, 37);
+            btnUpdateTeam.Location = new Point(418, 300);
+            btnUpdateTeam.Name = "btnUpdateTeam";
+            btnUpdateTeam.PressedBorderColor = Color.FromArgb(165, 37, 37);
+            btnUpdateTeam.PressedColor = Color.FromArgb(165, 37, 37);
+            btnUpdateTeam.Size = new Size(120, 43);
+            btnUpdateTeam.TabIndex = 43;
+            btnUpdateTeam.Text = "Update Team";
+            btnUpdateTeam.TextAlignment = StringAlignment.Center;
+            btnUpdateTeam.Click += btnUpdateTeam_Click;
+            // 
+            // btnAddTeam
+            // 
+            btnAddTeam.BackColor = Color.Transparent;
+            btnAddTeam.BorderColor = Color.FromArgb(32, 34, 37);
+            btnAddTeam.EnteredBorderColor = Color.FromArgb(165, 37, 37);
+            btnAddTeam.EnteredColor = Color.FromArgb(32, 34, 37);
+            btnAddTeam.Font = new Font("Microsoft Sans Serif", 12F);
+            btnAddTeam.Image = null;
+            btnAddTeam.ImageAlign = ContentAlignment.MiddleLeft;
+            btnAddTeam.InactiveColor = Color.FromArgb(32, 34, 37);
+            btnAddTeam.Location = new Point(418, 220);
+            btnAddTeam.Name = "btnAddTeam";
+            btnAddTeam.PressedBorderColor = Color.FromArgb(165, 37, 37);
+            btnAddTeam.PressedColor = Color.FromArgb(165, 37, 37);
+            btnAddTeam.Size = new Size(120, 43);
+            btnAddTeam.TabIndex = 42;
+            btnAddTeam.Text = "Add Team";
+            btnAddTeam.TextAlignment = StringAlignment.Center;
+            btnAddTeam.Click += btnAddTeam_Click;
+            // 
+            // txtTeamName
+            // 
+            txtTeamName.BackColor = Color.Transparent;
+            txtTeamName.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtTeamName.ForeColor = Color.FromArgb(176, 183, 191);
+            txtTeamName.Image = null;
+            txtTeamName.Location = new Point(211, 220);
+            txtTeamName.MaxLength = 32767;
+            txtTeamName.Multiline = false;
+            txtTeamName.Name = "txtTeamName";
+            txtTeamName.ReadOnly = false;
+            txtTeamName.Size = new Size(200, 43);
+            txtTeamName.TabIndex = 36;
+            txtTeamName.TextAlignment = HorizontalAlignment.Left;
+            txtTeamName.UseSystemPasswordChar = false;
+            // 
+            // labelEdit21
+            // 
+            labelEdit21.AutoSize = true;
+            labelEdit21.BackColor = Color.Transparent;
+            labelEdit21.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelEdit21.ForeColor = Color.FromArgb(116, 125, 132);
+            labelEdit21.Location = new Point(211, 190);
+            labelEdit21.Name = "labelEdit21";
+            labelEdit21.Size = new Size(66, 24);
+            labelEdit21.TabIndex = 38;
+            labelEdit21.Text = "Name:";
+            // 
+            // txtTeamPlayerID
+            // 
+            txtTeamPlayerID.BackColor = Color.Transparent;
+            txtTeamPlayerID.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtTeamPlayerID.ForeColor = Color.FromArgb(176, 183, 191);
+            txtTeamPlayerID.Image = null;
+            txtTeamPlayerID.Location = new Point(5, 380);
+            txtTeamPlayerID.MaxLength = 32767;
+            txtTeamPlayerID.Multiline = false;
+            txtTeamPlayerID.Name = "txtTeamPlayerID";
+            txtTeamPlayerID.ReadOnly = false;
+            txtTeamPlayerID.Size = new Size(200, 43);
+            txtTeamPlayerID.TabIndex = 32;
+            txtTeamPlayerID.TextAlignment = HorizontalAlignment.Left;
+            txtTeamPlayerID.UseSystemPasswordChar = false;
+            // 
+            // labelEdit22
+            // 
+            labelEdit22.AutoSize = true;
+            labelEdit22.BackColor = Color.Transparent;
+            labelEdit22.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelEdit22.ForeColor = Color.FromArgb(116, 125, 132);
+            labelEdit22.Location = new Point(5, 350);
+            labelEdit22.Name = "labelEdit22";
+            labelEdit22.Size = new Size(89, 24);
+            labelEdit22.TabIndex = 35;
+            labelEdit22.Text = "Player ID:";
+            // 
+            // txtCaptainID
+            // 
+            txtCaptainID.BackColor = Color.Transparent;
+            txtCaptainID.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtCaptainID.ForeColor = Color.FromArgb(176, 183, 191);
+            txtCaptainID.Image = null;
+            txtCaptainID.Location = new Point(5, 300);
+            txtCaptainID.MaxLength = 32767;
+            txtCaptainID.Multiline = false;
+            txtCaptainID.Name = "txtCaptainID";
+            txtCaptainID.ReadOnly = false;
+            txtCaptainID.Size = new Size(200, 43);
+            txtCaptainID.TabIndex = 31;
+            txtCaptainID.TextAlignment = HorizontalAlignment.Left;
+            txtCaptainID.UseSystemPasswordChar = false;
+            // 
+            // labelEdit23
+            // 
+            labelEdit23.AutoSize = true;
+            labelEdit23.BackColor = Color.Transparent;
+            labelEdit23.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelEdit23.ForeColor = Color.FromArgb(116, 125, 132);
+            labelEdit23.Location = new Point(5, 270);
+            labelEdit23.Name = "labelEdit23";
+            labelEdit23.Size = new Size(100, 24);
+            labelEdit23.TabIndex = 34;
+            labelEdit23.Text = "Captain ID:";
+            // 
+            // txtTeamID
+            // 
+            txtTeamID.BackColor = Color.Transparent;
+            txtTeamID.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtTeamID.ForeColor = Color.FromArgb(176, 183, 191);
+            txtTeamID.Image = null;
+            txtTeamID.Location = new Point(5, 220);
+            txtTeamID.MaxLength = 32767;
+            txtTeamID.Multiline = false;
+            txtTeamID.Name = "txtTeamID";
+            txtTeamID.ReadOnly = false;
+            txtTeamID.Size = new Size(200, 43);
+            txtTeamID.TabIndex = 30;
+            txtTeamID.TextAlignment = HorizontalAlignment.Left;
+            txtTeamID.UseSystemPasswordChar = false;
+            // 
+            // labelEdit24
+            // 
+            labelEdit24.AutoSize = true;
+            labelEdit24.BackColor = Color.Transparent;
+            labelEdit24.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelEdit24.ForeColor = Color.FromArgb(116, 125, 132);
+            labelEdit24.Location = new Point(5, 190);
+            labelEdit24.Name = "labelEdit24";
+            labelEdit24.Size = new Size(32, 24);
+            labelEdit24.TabIndex = 33;
+            labelEdit24.Text = "ID:";
+            // 
+            // btnLoadTeams
+            // 
+            btnLoadTeams.BackColor = Color.Transparent;
+            btnLoadTeams.BorderColor = Color.FromArgb(32, 34, 37);
+            btnLoadTeams.EnteredBorderColor = Color.FromArgb(165, 37, 37);
+            btnLoadTeams.EnteredColor = Color.FromArgb(32, 34, 37);
+            btnLoadTeams.Font = new Font("Microsoft Sans Serif", 12F);
+            btnLoadTeams.Image = null;
+            btnLoadTeams.ImageAlign = ContentAlignment.MiddleLeft;
+            btnLoadTeams.InactiveColor = Color.FromArgb(32, 34, 37);
+            btnLoadTeams.Location = new Point(544, 220);
+            btnLoadTeams.Name = "btnLoadTeams";
+            btnLoadTeams.PressedBorderColor = Color.FromArgb(165, 37, 37);
+            btnLoadTeams.PressedColor = Color.FromArgb(165, 37, 37);
+            btnLoadTeams.Size = new Size(120, 43);
+            btnLoadTeams.TabIndex = 29;
+            btnLoadTeams.Text = "Load Teams";
+            btnLoadTeams.TextAlignment = StringAlignment.Center;
+            btnLoadTeams.Click += btnLoadTeams_Click;
+            // 
+            // dataGridTeamPlayers
+            // 
+            dataGridTeamPlayers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridTeamPlayers.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn10, dataGridViewTextBoxColumn11, dataGridViewTextBoxColumn12 });
+            dataGridTeamPlayers.Location = new Point(344, 5);
+            dataGridTeamPlayers.Name = "dataGridTeamPlayers";
+            dataGridTeamPlayers.RowHeadersWidth = 58;
+            dataGridTeamPlayers.Size = new Size(320, 180);
+            dataGridTeamPlayers.TabIndex = 28;
+            dataGridTeamPlayers.CellDoubleClick += dataGridTeamPlayers_CellDoubleClick;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            dataGridViewTextBoxColumn7.HeaderText = "ID";
+            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            dataGridViewTextBoxColumn8.HeaderText = "First Name";
+            dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            dataGridViewTextBoxColumn9.HeaderText = "Last Name";
+            dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            dataGridViewTextBoxColumn10.HeaderText = "Gamertag";
+            dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            dataGridViewTextBoxColumn10.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            dataGridViewTextBoxColumn11.HeaderText = "Email";
+            dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            dataGridViewTextBoxColumn12.HeaderText = "Timezone (UTC)";
+            dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // dataGridTeams
+            // 
+            dataGridTeams.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridTeams.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, TeamName, dataGridViewTextBoxColumn6, CaptainID });
+            dataGridTeams.Location = new Point(5, 5);
+            dataGridTeams.Name = "dataGridTeams";
+            dataGridTeams.RowHeadersWidth = 30;
+            dataGridTeams.Size = new Size(320, 180);
+            dataGridTeams.TabIndex = 27;
+            dataGridTeams.CellContentDoubleClick += dataGridTeams_CellContentDoubleClick;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.HeaderText = "ID";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // TeamName
+            // 
+            TeamName.HeaderText = "Name";
+            TeamName.Name = "TeamName";
+            TeamName.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            dataGridViewTextBoxColumn6.HeaderText = "Timezone (UTC)";
+            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // CaptainID
+            // 
+            CaptainID.HeaderText = "Captain ID";
+            CaptainID.Name = "CaptainID";
+            CaptainID.ReadOnly = true;
             // 
             // matchPage
             // 
@@ -778,6 +1471,7 @@
             btnMinimise.PressedColor = Color.Transparent;
             btnMinimise.Size = new Size(40, 40);
             btnMinimise.TabIndex = 1;
+            btnMinimise.TabStop = false;
             btnMinimise.Text = "";
             btnMinimise.TextAlignment = StringAlignment.Center;
             btnMinimise.Click += btnMinimise_Click;
@@ -800,6 +1494,7 @@
             btnClose.PressedColor = Color.Transparent;
             btnClose.Size = new Size(40, 40);
             btnClose.TabIndex = 0;
+            btnClose.TabStop = false;
             btnClose.Text = "";
             btnClose.TextAlignment = StringAlignment.Center;
             btnClose.Click += btnClose_Click;
@@ -825,6 +1520,15 @@
             ((System.ComponentModel.ISupportInitialize)numTournamentSize).EndInit();
             infoPage.ResumeLayout(false);
             infoPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numSizeInfo).EndInit();
+            playerPage.ResumeLayout(false);
+            playerPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridPlayer).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numPlayerTimezone).EndInit();
+            teamPage.ResumeLayout(false);
+            teamPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridTeamPlayers).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridTeams).EndInit();
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
             ResumeLayout(false);
@@ -841,7 +1545,6 @@
         private TabPage teamPage;
         private TabPage matchPage;
         private ReaLTaiizor.Controls.Button btnMinimise;
-        private ReaLTaiizor.Controls.Button btnOpenFile;
         private ReaLTaiizor.Controls.LabelEdit labelEdit1;
         private ReaLTaiizor.Controls.TextBoxEdit txtConnectTournament;
         private ReaLTaiizor.Controls.BigLabel bigLabel1;
@@ -870,11 +1573,9 @@
         private ReaLTaiizor.Controls.CrownNumeric numTournamentSize;
         private ReaLTaiizor.Controls.Button btnConnectDatabase;
         private ReaLTaiizor.Controls.BigLabel Infomation;
-        private ReaLTaiizor.Controls.TextBoxEdit txtSizeInfo;
         private ReaLTaiizor.Controls.LabelEdit labelEdit11;
         private ReaLTaiizor.Controls.TextBoxEdit txtTypeInfo;
         private ReaLTaiizor.Controls.LabelEdit labelEdit10;
-        private ReaLTaiizor.Controls.TextBoxEdit txtDateInfo;
         private ReaLTaiizor.Controls.LabelEdit labelEdit9;
         private ReaLTaiizor.Controls.TextBoxEdit txtNameInfo;
         private ReaLTaiizor.Controls.LabelEdit labelEdit5;
@@ -883,5 +1584,57 @@
         private CheckBox checkIsTeamsInfo;
         private ReaLTaiizor.Controls.Button btnUpdateInfo;
         private ReaLTaiizor.Controls.Button btnPopulateInfo;
+        private CheckBox checkIsTeams;
+        private ReaLTaiizor.Controls.PoisonDateTime datetimeInfo;
+        private ReaLTaiizor.Controls.CrownNumeric numSizeInfo;
+        private ReaLTaiizor.Controls.Button btnLoadPlayers;
+        private ReaLTaiizor.Controls.TextBoxEdit txtPlayerLName;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit13;
+        private ReaLTaiizor.Controls.TextBoxEdit txtPlayerFName;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit14;
+        private ReaLTaiizor.Controls.TextBoxEdit txtPlayerID;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit15;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit16;
+        private ReaLTaiizor.Controls.TextBoxEdit txtPlayerEmail;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit17;
+        private ReaLTaiizor.Controls.TextBoxEdit txtPlayerTag;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit18;
+        private ReaLTaiizor.Controls.CrownNumeric numPlayerTimezone;
+        private ReaLTaiizor.Controls.Button btnAddPlayer;
+        private DataGridView dataGridPlayer;
+        private DataGridViewTextBoxColumn ID1;
+        private DataGridViewTextBoxColumn FirstName1;
+        private DataGridViewTextBoxColumn LastName1;
+        private DataGridViewTextBoxColumn Gamertag1;
+        private DataGridViewTextBoxColumn Email1;
+        private DataGridViewTextBoxColumn Timezone1;
+        private ReaLTaiizor.Controls.Button btnUpdatePlayer;
+        private ReaLTaiizor.Controls.Button btnDeletePlayer;
+        private DataGridView dataGridTeamPlayers;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private DataGridView dataGridTeams;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn TeamName;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private DataGridViewTextBoxColumn CaptainID;
+        private ReaLTaiizor.Controls.Button btnRemoveTeamPlayer;
+        private ReaLTaiizor.Controls.Button btnAssignPlayer;
+        private ReaLTaiizor.Controls.Button btnDeleteTeam;
+        private ReaLTaiizor.Controls.Button btnUpdateTeam;
+        private ReaLTaiizor.Controls.Button btnAddTeam;
+        private ReaLTaiizor.Controls.TextBoxEdit txtTeamName;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit21;
+        private ReaLTaiizor.Controls.TextBoxEdit txtTeamPlayerID;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit22;
+        private ReaLTaiizor.Controls.TextBoxEdit txtCaptainID;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit23;
+        private ReaLTaiizor.Controls.TextBoxEdit txtTeamID;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit24;
+        private ReaLTaiizor.Controls.Button btnLoadTeams;
     }
 }
